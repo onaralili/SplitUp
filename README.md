@@ -1,7 +1,7 @@
 # ↗️ SplitUp! ↗️
 ✨ SplitUp! is a Chrome extension allows a user to split one or many tabs into a different window. ✨
 
-✨An open-source, a tiny chrome extension to make your life browser experience easier.
+✨An open-source, a tiny chrome extension to make your browser experience easier.
 
 ✨It is especially handy when you are dealing multiple tabs and want to organize some of the tabs in a different window.
 
