@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <title>SplitUp!</title>
+    <style type="text/css">
+      body {
+        margin: 0;
+        white-space: nowrap;
+      }
+
+      h1 {
+        font-size: 14px;
+        color: rgb(98, 209, 0);
+        margin-left: 1em;
+      }
+
+      #container {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      p {
+        margin: 0.4em;
+      }
+
+      img{
+        margin-left: 0.4em;
+        margin-right: 0.4em;
+        margin-bottom: -0.3em;
+      }
+
+      #cbList{
+        display: inline-block;
+        border:0;
+      }
+
+      .titleContainer {
+        background-color:rgb(220, 241, 198);
+        display:flex;
+        box-sizing:border-box;
+        border:0;
+        padding-right: 1em;
+      }
+
+      .bottomContainer {
+        background-color:rgb(220, 241, 198);
+        box-sizing:border-box;
+        border:0;
+        padding: 2em;
+        position: relative;
+        margin-top: 2em;
+
+
+      }
+      #btSplit {
+        background-color: rgb(98, 209, 0);
+        color: white;
+        border: 3;
+        outline: none;
+        padding: 1em;
+        border-radius: 1em;
+        padding-right: 1em;
+        position: absolute;
+        margin-top: -3em;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+        margin-left: -0.4em;
+
+        
+      }
+
+      
+    </style>
+
+    <script src="popup.js"></script>
+  </head>
+
+  <body>
+    <div class="titleContainer"><h1>Choose tabs you want to open in a separate window</h1></div>
+    <form><fieldset id="cbList"></fieldset></form> 
+   <div class="bottomContainer"><button id="btSplit">SplitUp!</button></div>
+  </body>
+</html>

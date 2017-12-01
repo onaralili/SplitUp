@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+  
+    "name": "SplitUp!",
+    "description": "This extension allows a user to split one or many tabs into a different window.",
+    "version": "1.1",
+    "short_name" : "SplitUp!",
+  
+    "browser_action": {
+      "default_icon": "split.png",
+      "default_popup": "popup.html",
+      "default_title": "Click to split tabs"
+      
+    },
+    "icons":
+    {
+       "128": "split.png"
+    },
+
+    "permissions": [
+      "tabs"
+    ]
+  }
