@@ -1,6 +1,7 @@
 body {
     margin: 0;
-    white-space: nowrap;
+    /* white-space: nowrap; */
+    width: 400px;
   }
 
   h1 {
@@ -29,9 +30,15 @@ body {
     margin-bottom: -0.3em;
   }
 
+  .navbar{
+    background-color:rgb(98, 209, 0);
+  }
+
   #cbList{
     display: inline-block;
+    min-height: 500px;
     border:0;
+    padding-top: 5em;
   }
 
   .titleContainer {
@@ -43,15 +50,12 @@ body {
   }
 
   .bottomContainer {
-    background-color:rgb(220, 241, 198);
-    box-sizing:border-box;
-    border:0;
-    padding: 2em;
-    position: relative;
-    margin-top: 2em;
-
-
+    border: 0;
+    padding-bottom: 4em;
+    position: absolute;
+   
   }
+
   #btSplit {
     background-color: rgb(98, 209, 0);
     color: white;

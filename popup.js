@@ -19,35 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
     })  
 
     chrome.windows.getAll({populate:true},function(windows){
-
       var cbList = document.getElementById("cbList");
       let ul = document.createElement("ul");
       ul.setAttribute("class","list");
 
         windows.forEach(function(window){
+          console.log("win. id " + window.id)
         window.tabs.forEach(function(tab){
-
-          // var labelEl = document.createElement("label");
-          // var inputContent = document.createElement("input");
-          // var icon =  document.createElement("img");
-
-
-          // inputContent.setAttribute("type","checkbox");
-          // inputContent.setAttribute("name","urlcb");
-          // icon.setAttribute("src",tab.favIconUrl);
-          // icon.setAttribute("width","16");
-          // icon.setAttribute("height","16");
-          // labelEl.setAttribute("class","item");
-         
-
-          // labelEl.appendChild(inputContent);
-          // var t = document.createTextNode(tab.title.substring(0,50));
-          // inputContent.value = tab.url;
-          // labelEl.appendChild(icon);
-          // labelEl.appendChild(t);
-
-          // var p = document.createElement("p");
-          // p.appendChild(labelEl)
 
           // main tag
           let li = document.createElement("li");
@@ -64,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
           checkbox.setAttribute("name","urlcb");
           checkbox.setAttribute("class","cb");
           checkbox.value = tab.url;
-          
           // append tags
           li.appendChild(checkbox);
           li.appendChild(icon);
@@ -79,7 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
         valueNames: [ 'item','cb','urlIcon' ]
     };
     
-    var hackerList = new List('cbList', options);
+    var wUrlList = new List('cbList', options);
+
+    $(".search").keyup(function(){
+      wUrlList.search($(this).val());
+  });
 
     });
   
