@@ -14,11 +14,9 @@ body {
     list-style: none;
   }
 
-  /* #container {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-  } */
+  #container {
+    padding-left: 7px;
+  }
 /* 
   p {
     margin: 0.4em;
@@ -33,11 +31,14 @@ body {
   .navbar{
     background-color:rgb(98, 209, 0);
   }
+#list{
+  padding-left: 0.9em;
+}
 
   #cbList{
     display: inline-block;
     min-height: 500px;
-    border:0;
+    /* border:0; */
     padding-top: 5em;
   }
 
