@@ -14,3 +14,7 @@
 
 ![](https://lh3.googleusercontent.com/ru8B7Laqk767sqBULWnU5fZ6lS0evV7plNb1qIeeinUKxR6l4XaAvLt795TTQf48_hfNknpT=w640-h400-e365)
 
+
+## License
+
+This project is licensed under the MIT License.
