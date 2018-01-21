@@ -14,13 +14,29 @@ body {
     list-style: none;
   }
 
-  #container {
+  /* #container {
     padding-left: 7px;
-  }
+  } */
 /* 
   p {
     margin: 0.4em;
   } */
+.cclose{
+  background: transparent;
+  color: red;
+  border:0;
+  outline: 0;
+  font-size: 1em !important;
+  display: none;
+}
+
+.cclose:hover {
+  color: lightcoral;
+}
+
+li:hover .cclose{
+    display: inline;
+  }
 
   img{
     margin-left: 0.4em;
@@ -31,6 +47,7 @@ body {
   .navbar{
     background-color:rgb(98, 209, 0);
   }
+
 #list{
   padding-left: 0.9em;
 }
@@ -40,15 +57,19 @@ body {
     min-height: 500px;
     /* border:0; */
     padding-top: 5em;
+    margin-right: -1em;
   }
-
+  .container{
+    padding-left: 0px !important;
+  }
+/* 
   .titleContainer {
     background-color:rgb(220, 241, 198);
     display:flex;
     box-sizing:border-box;
     border:0;
     padding-right: 1em;
-  }
+  } */
 
   .bottomContainer {
     border: 0;

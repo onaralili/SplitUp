@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ul.setAttribute("class","list");
 
     windows.forEach(function (window) {
-      console.log("win. id " + window.id)
+      // console.log("win. id " + window.id)
       let color = getRandomColor();
       let listId = "list_" + window.id;
       windowsList.push(listId);
@@ -48,13 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
         let urlText = document.createElement("span");
         let icon = document.createElement("img");
         let checkbox = document.createElement("input");
+        let close = document.createElement("input");
         icon.setAttribute("src", tab.favIconUrl);
         icon.setAttribute("width", "16");
         icon.setAttribute("height", "16");
         icon.setAttribute("class", "urlIcon")
+        close.setAttribute('class','cclose');
         urlText.setAttribute("class", "item");
         urlText.textContent = tab.title.substring(0, 50);
         urlText.title = tab.title;
+        close.value = 'X';
+        close.type = 'button';
+        close.id = tab.id;
         checkbox.setAttribute("type", "checkbox");
         checkbox.setAttribute("name", "urlcb");
         checkbox.setAttribute("class", "cb");
@@ -63,7 +68,16 @@ document.addEventListener('DOMContentLoaded', () => {
         li.appendChild(checkbox);
         li.appendChild(icon);
         li.appendChild(urlText);
+        li.appendChild(close);
         ul.appendChild(li);
+
+        close.addEventListener('click',function(e){
+          // ev.stopPropagation();
+          // ev.preventDefault();
+          // console.log(e.path[0].id)
+              closeTab(e.path[0].id);
+          });
+
       });
     });
 
@@ -72,8 +86,35 @@ document.addEventListener('DOMContentLoaded', () => {
   $(".search").keyup(function () {
     search();
   });
+  
+  // $(".close").click(function(e) {
+  //   //closeTab(e, e.currentTarget.parentNode);
+  //   console.log("clicked");
+  // });
 
+    // var closebt = document.getElementsByClassName('cclose');
+    // console.log(closebt)
+    // console.log(closebt.length)
+    //   for (var i = 0 ; i < closebt.length; i++) {
+    //     console.log(i)
+    //     closebt[i].addEventListener('click',function(ev){
+    //     ev.stopPropagation();
+    //     ev.preventDefault();
+    //     console.log('clicked');
+    //     });
+    //  }
+
+   
 });
+
+function closeTab(e) {
+  var tabId = Number(e);
+	// tab = main.removeChild(tab);
+  chrome.tabs.remove(tabId);
+  $( "#" + e ).parent().remove();
+	e.stopPropagation();
+	e.preventDefault();
+}
 
 // generates a random color
 function getRandomColor() {
@@ -89,18 +130,12 @@ function getRandomColor() {
 function search() {
   var input, filter, ul, li, a, i;
   input = document.getElementsByClassName('search');
-  console.log(input);
   filter = input[0].value.toUpperCase();
   ul = document.getElementsByClassName("listMain");
-  console.log(ul);
-
   for (t = 0; t < ul.length; t++) {
-    
     li = ul[t].getElementsByTagName('li');
-
     for (i = 0; i < li.length; i++) {
       a = li[i].getElementsByTagName("span")[0];
-      console.log(a);
       if (a.title.toUpperCase().indexOf(filter) > -1) {
         li[i].style.display = "";
       } else {
