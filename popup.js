@@ -21,11 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   chrome.windows.getAll({ populate: true }, function (windows) {
     var cbList = document.getElementById("cbList");
-    // let ul = document.createElement("ul");
-    // ul.setAttribute("class","list");
 
     windows.forEach(function (window) {
-      // console.log("win. id " + window.id)
       let color = getRandomColor();
       let listId = "list_" + window.id;
       windowsList.push(listId);
@@ -55,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         icon.setAttribute("class", "urlIcon")
         close.setAttribute('class','cclose');
         urlText.setAttribute("class", "item");
-        urlText.textContent = tab.title.substring(0, 50);
+        urlText.textContent = tab.title.substring(0, 40);
         urlText.title = tab.title;
         close.value = 'X';
         close.type = 'button';
@@ -86,30 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
   $(".search").keyup(function () {
     search();
   });
-  
-  // $(".close").click(function(e) {
-  //   //closeTab(e, e.currentTarget.parentNode);
-  //   console.log("clicked");
-  // });
-
-    // var closebt = document.getElementsByClassName('cclose');
-    // console.log(closebt)
-    // console.log(closebt.length)
-    //   for (var i = 0 ; i < closebt.length; i++) {
-    //     console.log(i)
-    //     closebt[i].addEventListener('click',function(ev){
-    //     ev.stopPropagation();
-    //     ev.preventDefault();
-    //     console.log('clicked');
-    //     });
-    //  }
-
    
 });
 
 function closeTab(e) {
   var tabId = Number(e);
-	// tab = main.removeChild(tab);
   chrome.tabs.remove(tabId);
   $( "#" + e ).parent().remove();
 	e.stopPropagation();

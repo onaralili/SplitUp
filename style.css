@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    /* white-space: nowrap; */
     width: 400px;
   }
 
@@ -13,28 +12,20 @@ body {
   ul{
     list-style: none;
   }
+  .cclose{
+    background: transparent;
+    color: red;
+    border:0;
+    outline: 0;
+    font-size: 1em !important;
+    display: none;
+  }
 
-  /* #container {
-    padding-left: 7px;
-  } */
-/* 
-  p {
-    margin: 0.4em;
-  } */
-.cclose{
-  background: transparent;
-  color: red;
-  border:0;
-  outline: 0;
-  font-size: 1em !important;
-  display: none;
-}
-
-.cclose:hover {
+  .cclose:hover {
   color: lightcoral;
 }
 
-li:hover .cclose{
+  li:hover .cclose{
     display: inline;
   }
 
@@ -48,28 +39,23 @@ li:hover .cclose{
     background-color:rgb(98, 209, 0);
   }
 
-#list{
-  padding-left: 0.9em;
-}
+  #list{
+    padding-left: 0.9em;
+  }
 
   #cbList{
-    display: inline-block;
     min-height: 500px;
-    /* border:0; */
     padding-top: 5em;
     margin-right: -1em;
+    padding-bottom: 0.5em;
   }
   .container{
     padding-left: 0px !important;
   }
-/* 
-  .titleContainer {
-    background-color:rgb(220, 241, 198);
-    display:flex;
-    box-sizing:border-box;
-    border:0;
-    padding-right: 1em;
-  } */
+  
+  .item{
+    font-size: 14px;
+  }
 
   .bottomContainer {
     border: 0;
@@ -94,55 +80,4 @@ li:hover .cclose{
     margin-left: -0.4em;
 
     
-  }
-
-.sort {
-    padding-right: 1em;
-    border-radius: 6px;
-    border:none;
-    display:inline-block;
-    color:#fff;
-    text-decoration: none;
-    background-color: #28a8e0;
-    height:30px;
-  }
-  .sort:hover {
-    text-decoration: none;
-    background-color:#1b8aba;
-  }
-  .sort:focus {
-    outline:none;
-  }
-  .sort:after {
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    content:"";
-    position: relative;
-    top:-10px;
-    right:-5px;
-  }
-  .sort.asc:after {
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid #fff;
-    content:"";
-    position: relative;
-    top:13px;
-    right:-5px;
-  }
-  .sort.desc:after {
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid #fff;
-    content:"";
-    position: relative;
-    top:-10px;
-    right:-5px;
   }
