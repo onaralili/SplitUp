@@ -29,10 +29,18 @@ body {
     display: inline;
   }
 
+  li:hover{
+   cursor: pointer;
+  }
+
   img{
     margin-left: 0.4em;
     margin-right: 0.4em;
     margin-bottom: -0.3em;
+  }
+
+  .audio{
+    margin-left: -1.4em;
   }
 
   .navbar{
@@ -40,7 +48,7 @@ body {
   }
 
   #list{
-    padding-left: 0.9em;
+    padding-left: 1.8em;
   }
 
   #cbList{

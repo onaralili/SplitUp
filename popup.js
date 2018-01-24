@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
       window.tabs.forEach(function (tab) {
 
         // main tag
+        // active:false
+        // audible:true
+
         let li = document.createElement("li");
         let urlText = document.createElement("span");
         let icon = document.createElement("img");
@@ -61,6 +64,18 @@ document.addEventListener('DOMContentLoaded', () => {
         checkbox.setAttribute("name", "urlcb");
         checkbox.setAttribute("class", "cb");
         checkbox.value = tab.url;
+        // make it bold
+        if(tab.active){
+          urlText.style.fontWeight =  "bold";
+        }
+        if(tab.audible){
+          let audioIcon = document.createElement("img");
+          audioIcon.setAttribute("src", "\\img\\audio.png");
+          audioIcon.setAttribute('class','audio')
+          audioIcon.setAttribute("width", "16");
+          audioIcon.setAttribute("height", "16");
+          li.appendChild(audioIcon);
+        }
         // append tags
         li.appendChild(checkbox);
         li.appendChild(icon);
@@ -69,12 +84,17 @@ document.addEventListener('DOMContentLoaded', () => {
         ul.appendChild(li);
 
         close.addEventListener('click',function(e){
-          // ev.stopPropagation();
-          // ev.preventDefault();
-          // console.log(e.path[0].id)
               closeTab(e.path[0].id);
           });
 
+          urlText.addEventListener('click',function(e){
+            // ev.stopPropagation();
+            // ev.preventDefault();
+            // console.log(e.path[0].id)
+                console.log(e)
+                selectTab(e.path[1].childNodes[3].id);
+            });
+         
       });
     });
 
@@ -83,9 +103,18 @@ document.addEventListener('DOMContentLoaded', () => {
   $(".search").keyup(function () {
     search();
   });
+  
    
 });
 
+function selectTab(e){
+  var tabId = Number(e);
+  chrome.tabs.update(tabId, { active: true });
+
+
+}
+
+// close the tab
 function closeTab(e) {
   var tabId = Number(e);
   chrome.tabs.remove(tabId);
