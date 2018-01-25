@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         icon.setAttribute("class", "urlIcon")
         close.setAttribute('class','cclose');
         urlText.setAttribute("class", "item");
-        urlText.textContent = tab.title.substring(0, 40);
+        urlText.textContent = tab.title.substring(0, 35);
         urlText.title = tab.title;
         close.value = 'X';
         close.type = 'button';
@@ -70,11 +70,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if(tab.audible){
           let audioIcon = document.createElement("img");
-          audioIcon.setAttribute("src", "\\img\\audio.png");
+          audioIcon.setAttribute("src", "\\img\\SoundIcon.png");
           audioIcon.setAttribute('class','audio')
           audioIcon.setAttribute("width", "16");
           audioIcon.setAttribute("height", "16");
           li.appendChild(audioIcon);
+
+          audioIcon.addEventListener('click',function(e){
+            muteTab(e.path[1].lastChild.id);
+            console.log(e.path[1].lastChild.id)
+        });
         }
         // append tags
         li.appendChild(checkbox);
@@ -107,11 +112,19 @@ document.addEventListener('DOMContentLoaded', () => {
    
 });
 
+function muteTab(e){
+  let tabId = Number(e);
+  chrome.tabs.get(tabId,function(tab){ 
+     chrome.tabs.update(tabId, { muted: !tab.mutedInfo.muted });
+
+     $("#"+tabId).siblings(".audio").attr("src", tab.mutedInfo.muted? "\\img\\SoundIcon.png": "\\img\\MuteIcon.png")
+  })
+  
+}
+
 function selectTab(e){
   var tabId = Number(e);
   chrome.tabs.update(tabId, { active: true });
-
-
 }
 
 // close the tab
