@@ -37,6 +37,7 @@ body {
     margin-left: 0.4em;
     margin-right: 0.4em;
     margin-bottom: -0.3em;
+    vertical-align: initial;
   }
 
   .audio{
@@ -52,7 +53,7 @@ body {
   }
 
   #cbList{
-    min-height: 500px;
+    /* min-height: 500px; */
     padding-top: 5em;
     margin-right: -1em;
     padding-bottom: 0.5em;
@@ -72,7 +73,7 @@ body {
    
   }
 
-  #btSplit {
+  /* #btSplit {
     background-color: rgb(98, 209, 0);
     color: white;
     border: 3;
@@ -88,4 +89,4 @@ body {
     margin-left: -0.4em;
 
     
-  }
+  } */

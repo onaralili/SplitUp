@@ -108,8 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $(".search").keyup(function () {
     search();
   });
-  
-   
+
 });
 
 function muteTab(e){
