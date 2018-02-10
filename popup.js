@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   var btSplit = document.getElementById('btSplit');
+  // var allStates = $("svg.splitUpBt");
+
+  var btSplitUp = document.querySelector(".splitUpBt");
   var urlList = [];
   var windowsList = [];
-  btSplit.addEventListener('click', () => {
+  btSplitUp.addEventListener('click', () => {
 
     var checkedBoxes = document.querySelectorAll('input[name=urlcb]:checked');
 
@@ -35,14 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
       let ul = document.createElement("ul");
       // ul.classList.add("list");  
       ul.setAttribute('id', "list");
-      ul.setAttribute('style', 'background-color: #f0ffee!important;border-color: #2196F3!important;border-left: 6px solid ' + color + '!important;')
+      ul.setAttribute('style', 'box-shadow: 0px 0px 9px #d8d8d8;background-color: white!important;border-left: 8px solid ' + color + '!important;')
       list.appendChild(ul);
 
       window.tabs.forEach(function (tab) {
-
-        // main tag
-        // active:false
-        // audible:true
 
         let li = document.createElement("li");
         let urlText = document.createElement("span");
@@ -53,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         icon.setAttribute("width", "16");
         icon.setAttribute("height", "16");
         icon.setAttribute("class", "urlIcon")
-        close.setAttribute('class','cclose');
+        close.setAttribute('class', 'cclose');
         urlText.setAttribute("class", "item");
         urlText.textContent = tab.title.substring(0, 35);
         urlText.title = tab.title;
@@ -65,22 +64,35 @@ document.addEventListener('DOMContentLoaded', () => {
         checkbox.setAttribute("class", "cb");
         checkbox.value = tab.url;
         // make it bold
-        if(tab.active){
-          urlText.style.fontWeight =  "bold";
+        if (tab.active) {
+          urlText.style.fontWeight = "bold";
         }
-        if(tab.audible){
+        if (tab.audible) {
           let audioIcon = document.createElement("img");
           audioIcon.setAttribute("src", "\\img\\SoundIcon.png");
-          audioIcon.setAttribute('class','audio')
+          audioIcon.setAttribute('class', 'audio')
           audioIcon.setAttribute("width", "16");
           audioIcon.setAttribute("height", "16");
           li.appendChild(audioIcon);
 
-          audioIcon.addEventListener('click',function(e){
+          audioIcon.addEventListener('click', function (e) {
             muteTab(e.path[1].lastChild.id);
             console.log(e.path[1].lastChild.id)
-        });
+          });
         }
+        // if(tab.pinned){
+        //   let pinnedIcon = document.createElement("img");
+        //   pinnedIcon.setAttribute("src", "\\img\\pin.png");
+        //   pinnedIcon.setAttribute('class','audio')
+        //   pinnedIcon.setAttribute("width", "16");
+        //   pinnedIcon.setAttribute("height", "16");
+        //   li.appendChild(pinnedIcon);
+
+        //   pinnedIcon.addEventListener('click',function(e){
+        //     pinTab(e.path[1].lastChild.id);
+        //     console.log(e.path[1].lastChild.id)
+        // });
+        // }
         // append tags
         li.appendChild(checkbox);
         li.appendChild(icon);
@@ -88,18 +100,15 @@ document.addEventListener('DOMContentLoaded', () => {
         li.appendChild(close);
         ul.appendChild(li);
 
-        close.addEventListener('click',function(e){
-              closeTab(e.path[0].id);
-          });
+        close.addEventListener('click', function (e) {
+          closeTab(e.path[0].id);
+        });
 
-          urlText.addEventListener('click',function(e){
-            // ev.stopPropagation();
-            // ev.preventDefault();
-            // console.log(e.path[0].id)
-                console.log(e)
-                selectTab(e.path[1].childNodes[3].id);
-            });
-         
+        urlText.addEventListener('click', function (e) {
+          console.log(e)
+          selectTab(e.path[1].childNodes[3].id);
+        });
+
       });
     });
 
@@ -109,19 +118,47 @@ document.addEventListener('DOMContentLoaded', () => {
     search();
   });
 
+  $("#exportTabs").click(function () {
+    var urls = [];
+    chrome.windows.getAll({ populate: true }, function (windows) {
+      windows.forEach(function (window) {
+        window.tabs.forEach(function (tab) {
+          urls.push(tab.url);
+        });
+      });
+
+      var n = urls.join("\n");
+      var currentTime = new Date().toJSON().slice(0,10);
+      // save file
+      var blob = new Blob([n], { type: "text/plain;charset=utf-8" });
+      saveAs(blob, currentTime+"_urls.txt");
+    });
+  });
+
 });
 
-function muteTab(e){
-  let tabId = Number(e);
-  chrome.tabs.get(tabId,function(tab){ 
-     chrome.tabs.update(tabId, { muted: !tab.mutedInfo.muted });
 
-     $("#"+tabId).siblings(".audio").attr("src", tab.mutedInfo.muted? "\\img\\SoundIcon.png": "\\img\\MuteIcon.png")
+// function pinTab(e){
+//   let tabId = Number(e);
+//   chrome.tabs.get(tabId,function(tab){ 
+//      chrome.tabs.update(tabId, { pinned: !tab.pinned });
+
+//      $("#"+tabId).siblings(".audio").attr("src", tab.pinned? "\\img\\pin.png": "\\img\\unpin.png")
+//   })
+
+// }
+
+function muteTab(e) {
+  let tabId = Number(e);
+  chrome.tabs.get(tabId, function (tab) {
+    chrome.tabs.update(tabId, { muted: !tab.mutedInfo.muted });
+
+    $("#" + tabId).siblings(".audio").attr("src", tab.mutedInfo.muted ? "\\img\\SoundIcon.png" : "\\img\\MuteIcon.png")
   })
-  
+
 }
 
-function selectTab(e){
+function selectTab(e) {
   var tabId = Number(e);
   chrome.tabs.update(tabId, { active: true });
 }
@@ -130,9 +167,9 @@ function selectTab(e){
 function closeTab(e) {
   var tabId = Number(e);
   chrome.tabs.remove(tabId);
-  $( "#" + e ).parent().remove();
-	e.stopPropagation();
-	e.preventDefault();
+  $("#" + e).parent().remove();
+  e.stopPropagation();
+  e.preventDefault();
 }
 
 // generates a random color

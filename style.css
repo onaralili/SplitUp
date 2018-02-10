@@ -1,13 +1,33 @@
 body {
     margin: 0;
     width: 400px;
+    background-color: whitesmoke !important;
   }
 
-  h1 {
-    font-size: 14px;
-    color: rgb(98, 209, 0);
-    margin-left: 1em;
+  .search{
+    border-radius: 9em !important;
+    border-style: hidden !important;
   }
+
+
+  .inner-addon { 
+    position: relative; 
+}
+#i-search {
+  position: absolute;
+  padding: 6px;
+  pointer-events: none;
+}
+/* align icon */
+#i-search { left:  0px;}
+
+/* add padding  */
+.left-addon input  { 
+  padding-left:  32px;
+  padding-bottom: 0em; 
+  padding-top: 0em;
+}
+
 
   ul{
     list-style: none;
@@ -37,23 +57,30 @@ body {
     margin-left: 0.4em;
     margin-right: 0.4em;
     margin-bottom: -0.3em;
-    vertical-align: initial;
+    vertical-align: initial !important;
   }
 
   .audio{
     margin-left: -1.4em;
   }
 
-  .navbar{
-    background-color:rgb(98, 209, 0);
-  }
-
   #list{
     padding-left: 1.8em;
   }
 
+  .navbar-brand {
+  margin-right: 0 !important;
+ 
+}
+
+#exportTabs{
+  width: 1.3em;
+  height: 1.3em;
+}
+
   #cbList{
-    /* min-height: 500px; */
+    z-index: 2000;
+    position: relative;
     padding-top: 5em;
     margin-right: -1em;
     padding-bottom: 0.5em;
@@ -68,25 +95,45 @@ body {
 
   .bottomContainer {
     border: 0;
-    padding-bottom: 4em;
-    position: absolute;
+    z-index: 1;
+    position: relative;
+    width: 400px;
+    height: 160px;
+    padding-bottom: 18em;
    
   }
+.navbar{
+  background-image:url('img/YellowStripe.png') !important;
+  background-repeat: round;
+}
 
+/* pinchers animation pinch1 */
+@keyframes pinchOpenClose {
+from {
+  color:black
+  }
+  to {
+  color:blue;
+  }
+}
+
+.pinch1{
+  /* transform: translate(130px,50px) rotate(20deg); */
+  transition: transform 300ms ease-in-out;
+  /* animation-name: pinchOpenClose;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: 2;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+  animation-play-state: running ; */
+}
+.pinch1:hover{
+  transform: rotate(10deg)
+}
   /* #btSplit {
-    background-color: rgb(98, 209, 0);
-    color: white;
-    border: 3;
-    outline: none;
-    padding: 1em;
-    border-radius: 1em;
-    padding-right: 1em;
-    position: absolute;
-    margin-top: -3em;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-    margin-left: -0.4em;
-
+    background-image: url('img/ButtonCrab.svg') no-repeat   ;
+    background-size: contain;
     
   } */
