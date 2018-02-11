@@ -46,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let checkbox = document.createElement("input");
         let close = document.createElement("input");
         li.setAttribute("draggable","true");
+        li.setAttribute("class","listItem");
+        li.id = tab.index;
         icon.setAttribute("src", tab.favIconUrl);
         icon.setAttribute("width", "16");
         icon.setAttribute("height", "16");
@@ -102,18 +104,23 @@ document.addEventListener('DOMContentLoaded', () => {
         close.addEventListener('click', function (e) {
           closeTab(e.path[0].id);
         });
-
         urlText.addEventListener('click', function (e) {
           console.log(e)
           selectTab(e.path[1].childNodes[3].id);
         });
-       
+        var cols = document.querySelectorAll('#list .listItem');
+        console.log(cols);
+        [].forEach.call(cols, addDnDHandlers);
+
+        $(".search").keyup(function () {
+          search();
+        });
+
+        document.getElementById("exportTabs").addEventListener('click',exportTabsFn);
+        document.getElementById("separate").addEventListener('click',separateExtFn);
       });
     }); 
   });
-
-  
-
 });
 
 

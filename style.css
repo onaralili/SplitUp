@@ -148,6 +148,12 @@ body {
 }
 
 
-.cb{
-  background: red !important;
+
+
+[draggable] {
+  user-select: none;
+}
+
+.listItem.over {
+  border-top: 2px solid #fdc80f;
 }

@@ -37,6 +37,7 @@ function closeTab(e) {
 
 // search through the item tags
 function search() {
+  console.log("ss")
   var input, filter, ul, li, a, i;
   input = document.getElementsByClassName('search');
   filter = input[0].value.toUpperCase();
@@ -64,12 +65,9 @@ function search() {
 //   })
 // }
 
-$(".search").keyup(function () {
-  search();
-});
-
 // export urls to external txt file
-$("#exportTabs").click(function () {
+function exportTabsFn() {
+  console.log("sss")
   var urls = [];
   chrome.windows.getAll({ populate: true }, function (windows) {
     windows.forEach(function (window) {
@@ -84,10 +82,11 @@ $("#exportTabs").click(function () {
     var blob = new Blob([n], { type: "text/plain;charset=utf-8" });
     saveAs(blob, currentTime+"_urls.txt");
   });
-});
+}
+
 
 // separate extension into different window
-$("#separate").click(function(){
+function separateExtFn(){
   let href = window.location.href;
 const bodyRect = document.querySelector('body').getBoundingClientRect();
 chrome.windows.create({
@@ -96,5 +95,4 @@ chrome.windows.create({
     width: bodyRect.width,
     height: bodyRect.height + 150,
 });
-
-})
+}
