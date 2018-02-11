@@ -146,3 +146,8 @@ body {
   animation: spinPinch2 1s infinite cubic-bezier(0.3, 0.76, 0.53, 0.92);
   transform-origin: 500% 50%;
 }
+
+
+.cb{
+  background: red !important;
+}
