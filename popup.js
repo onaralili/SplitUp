@@ -1,7 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  var btSplit = document.getElementById('btSplit');
-  // var allStates = $("svg.splitUpBt");
-
   var btSplitUp = document.querySelector(".splitUpBt");
   var urlList = [];
   var windowsList = [];
@@ -54,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         icon.setAttribute("class", "urlIcon")
         close.setAttribute('class', 'cclose');
         urlText.setAttribute("class", "item");
-        urlText.textContent = tab.title.substring(0, 35);
+        urlText.textContent = tab.title.substring(0, 33);
         urlText.title = tab.title;
         close.value = 'X';
         close.type = 'button';
@@ -108,10 +105,15 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log(e)
           selectTab(e.path[1].childNodes[3].id);
         });
-
+       
       });
     });
-
+    // const bodyRect1 = document.querySelector('body').getBoundingClientRect();
+    // console.log(bodyRect1.width + "  " + bodyRect1.height)
+    // $('body').height =  bodyRect1 + 150;
+    // var windowHeight = window.innerHeight;
+    // document.body.style.height = windowHeight + 150 + "px";
+    // console.log(document.body.style.height); 
   });
 
   $(".search").keyup(function () {
@@ -134,6 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
       saveAs(blob, currentTime+"_urls.txt");
     });
   });
+
+  $("#separate").click(function(){
+    let href = window.location.href;
+  const bodyRect = document.querySelector('body').getBoundingClientRect();
+  chrome.windows.create({
+      url: href,
+      type: 'popup',
+      width: bodyRect.width,
+      height: bodyRect.height + 150,
+  });
+
+  })
 
 });
 

@@ -7,14 +7,14 @@
     "short_name" : "SplitUp!",
   
     "browser_action": {
-      "default_icon": "split.png",
+      "default_icon": "SplitLogo.png",
       "default_popup": "popup.html",
       "default_title": "SplitUp!"
       
     },
     "icons":
     {
-       "128": "split.png"
+       "128": "SplitLogo.png"
     },
 
     "permissions": [

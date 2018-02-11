@@ -1,6 +1,9 @@
+html{
+  overflow: hidden;
+}
 body {
     margin: 0;
-    width: 400px;
+    width: 365px;
     background-color: whitesmoke !important;
   }
 
@@ -9,10 +12,22 @@ body {
     border-style: hidden !important;
   }
 
+  .search:focus{
+    outline-style:none !important;
+    box-shadow:none !important;
+    border-color:transparent !important;
+  }
+
+
+  input[type="search"]::-webkit-input-placeholder {
+    color: #d2d2d2;
+  }
 
   .inner-addon { 
     position: relative; 
+    width: 10em;
 }
+
 #i-search {
   position: absolute;
   padding: 6px;
@@ -27,7 +42,6 @@ body {
   padding-bottom: 0em; 
   padding-top: 0em;
 }
-
 
   ul{
     list-style: none;
@@ -76,8 +90,13 @@ body {
 #exportTabs{
   width: 1.3em;
   height: 1.3em;
+  margin-left: 0em;
 }
-
+#separate{
+  width: 1.3em;
+  height: 1.3em;
+  margin-left: -7em;
+}
   #cbList{
     z-index: 2000;
     position: relative;
@@ -99,41 +118,31 @@ body {
     position: relative;
     width: 400px;
     height: 160px;
-    padding-bottom: 18em;
-   
+    padding-bottom: 22em;
+    padding-left: 3em;
   }
 .navbar{
   background-image:url('img/YellowStripe.png') !important;
-  background-repeat: round;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
-/* pinchers animation pinch1 */
-@keyframes pinchOpenClose {
-from {
-  color:black
-  }
-  to {
-  color:blue;
-  }
+/* pinchers animation pinches */
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(-2deg);}
+}
+@keyframes spinPinch2 {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(4deg);}
+}
+  
+.splitUpBt:hover .pinch1{
+  animation: spin 1s infinite cubic-bezier(0.3, 0.76, 0.53, 0.92);
+  transform-origin: 500% 50%;
 }
 
-.pinch1{
-  /* transform: translate(130px,50px) rotate(20deg); */
-  transition: transform 300ms ease-in-out;
-  /* animation-name: pinchOpenClose;
-  animation-duration: 2s;
-  animation-timing-function: ease-in-out;
-  animation-delay: 0s;
-  animation-iteration-count: 2;
-  animation-direction: alternate;
-  animation-fill-mode: forwards;
-  animation-play-state: running ; */
+.splitUpBt:hover .pinch2{
+  animation: spinPinch2 1s infinite cubic-bezier(0.3, 0.76, 0.53, 0.92);
+  transform-origin: 500% 50%;
 }
-.pinch1:hover{
-  transform: rotate(10deg)
-}
-  /* #btSplit {
-    background-image: url('img/ButtonCrab.svg') no-repeat   ;
-    background-size: contain;
-    
-  } */
