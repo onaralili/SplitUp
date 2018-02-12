@@ -1,3 +1,4 @@
+"use strict"
 document.addEventListener('DOMContentLoaded', () => {
   var btSplitUp = document.querySelector(".splitUpBt");
   var urlList = [];
@@ -76,10 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
           audioIcon.setAttribute("height", "16");
           li.appendChild(audioIcon);
 
-          audioIcon.addEventListener('click', function (e) {
-            muteTab(e.path[1].lastChild.id);
-            console.log(e.path[1].lastChild.id)
-          });
         }
         // if(tab.pinned){
         //   let pinnedIcon = document.createElement("img");
@@ -101,15 +98,18 @@ document.addEventListener('DOMContentLoaded', () => {
         li.appendChild(close);
         ul.appendChild(li);
 
-        close.addEventListener('click', function (e) {
-          closeTab(e.path[0].id);
-        });
-        urlText.addEventListener('click', function (e) {
-          console.log(e)
-          selectTab(e.path[1].childNodes[3].id);
-        });
+        // close.addEventListener('click', function (e) {
+        //   closeTab(e.path[0].id);
+        // });
+
+        // urlText.addEventListener('click', function (e) {
+        //   selectTab(e.path[1].childNodes[3].id);
+        // });
+
+        // binds listeners to the elements
+        BindListenersToElements();
+
         var cols = document.querySelectorAll('#list .listItem');
-        console.log(cols);
         [].forEach.call(cols, addDnDHandlers);
 
         $(".search").keyup(function () {

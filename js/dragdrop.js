@@ -1,3 +1,4 @@
+"use strict"
 // drag and drop using HTML5 
 
 var dragSrcEl = null;
@@ -62,22 +63,17 @@ function handleDrop(e) {
 function handleDragEnd(e) {
     // this/e.target is the source node.
     this.classList.remove('over');
-    console.log($("#" + dragSrcEl.id))
-    let indexId = Number($("#" + dragSrcEl.id)[0].previousElementSibling.previousElementSibling.id) + 1;
-    let tabId = Number($("#" + dragSrcEl.id)[0].lastChild.id);
-    console.log("moving the tab "+ tabId + "\n" + "to the position index "+ indexId);
-    chrome.tabs.move(tabId, { index: indexId }, function () {
-        // reorder the index of urls
-        try {
-            let elements = $('.listMain').find('li');
-            for (let i = 0; i < 9; i++) {
-                console.log(elements[i].id)
-                elements[i].id = i;
-            }
-        } catch (error) {
-           // error handling
-        }
+    
+    let elements = $('.listMain').find('li');
+    console.log(elements)
 
+    elements.map(function(element){
+        elements[element].id=element;
+        let tabId = elements[element].lastChild.id;
+        chrome.tabs.move(Number(tabId),{index:element})
+        $('meta').remove();
+        // binds listeners to the elements
+        BindListenersToElements();
     });
 }
 

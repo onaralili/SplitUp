@@ -147,9 +147,6 @@ body {
   transform-origin: 500% 50%;
 }
 
-
-
-
 [draggable] {
   user-select: none;
 }
