@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let list = document.createElement("div");
       list.setAttribute('id', listId);
       list.classList.add("listMain")
+      list.id=window.id;
       cbList.appendChild(list);
 
       let ul = document.createElement("ul");

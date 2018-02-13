@@ -38,14 +38,13 @@ function closeTab(e) {
 
 // search through the item tags
 function search() {
-  console.log("ss")
   var input, filter, ul, li, a, i;
   input = document.getElementsByClassName('search');
   filter = input[0].value.toUpperCase();
   ul = document.getElementsByClassName("listMain");
-  for (t = 0; t < ul.length; t++) {
+  for (let t = 0; t < ul.length; t++) {
     li = ul[t].getElementsByTagName('li');
-    for (i = 0; i < li.length; i++) {
+    for (let i = 0; i < li.length; i++) {
       a = li[i].getElementsByTagName("span")[0];
       if (a.title.toUpperCase().indexOf(filter) > -1) {
         li[i].style.display = "";
@@ -68,7 +67,6 @@ function search() {
 
 // export urls to external txt file
 function exportTabsFn() {
-  console.log("sss")
   var urls = [];
   chrome.windows.getAll({ populate: true }, function (windows) {
     windows.forEach(function (window) {

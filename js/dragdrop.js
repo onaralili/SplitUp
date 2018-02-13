@@ -2,7 +2,7 @@
 // drag and drop using HTML5 
 
 var dragSrcEl = null;
-
+var movingToWindowId,currentWindowId = null
 function handleDragStart(e) {
     // Target (this) element is the source node.
     dragSrcEl = this;
@@ -42,11 +42,21 @@ function handleDrop(e) {
     // Don't do anything if dropping the same column we're dragging.
     if (dragSrcEl != this) {
         console.log("the same target")
+        console.log(dragSrcEl)
+        console.log(this.parentNode.parentNode)
+        movingToWindowId = this.parentNode.parentNode.id;
+        currentWindowId = dragSrcEl.parentNode.parentNode.id;
+
+        // console.log("movedW "+ movedWindow.id + "currentW" + currentWindow.id );
         // Set the source column's HTML to the HTML of the column we dropped on.
         //alert(this.outerHTML);
         //dragSrcEl.innerHTML = this.innerHTML;
         //this.innerHTML = e.dataTransfer.getData('text/html');
-        this.parentNode.removeChild(dragSrcEl);
+        if(currentWindowId==movingToWindowId){
+            this.parentNode.removeChild(dragSrcEl);
+        } else{
+            dragSrcEl.parentNode.removeChild(dragSrcEl);
+        }
         var dropHTML = e.dataTransfer.getData('text/html');
         this.insertAdjacentHTML('beforebegin', dropHTML);
         var dropElem = this.previousSibling;
@@ -63,14 +73,19 @@ function handleDrop(e) {
 function handleDragEnd(e) {
     // this/e.target is the source node.
     this.classList.remove('over');
-    
-    let elements = $('.listMain').find('li');
-    console.log(elements)
+   
+   console.log(currentWindowId);
+   console.log(movingToWindowId);
 
+//    let windowId = Number(currentWindowId!=movingToWindowId ? movingToWindowId : currentWindowId);
+    
+   console.log(movingToWindowId)
+
+    let elements = $("#"+movingToWindowId).find('li');
     elements.map(function(element){
         elements[element].id=element;
         let tabId = elements[element].lastChild.id;
-        chrome.tabs.move(Number(tabId),{index:element})
+        chrome.tabs.move(Number(tabId),{windowId:Number(movingToWindowId),index:element})
         $('meta').remove();
         // binds listeners to the elements
         BindListenersToElements();
