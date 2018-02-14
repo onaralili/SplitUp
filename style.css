@@ -1,10 +1,9 @@
-html{
-  overflow: hidden;
-}
-body {
+html,body {
     margin: 0;
-    width: 365px;
+    width: 400px;
     background-color: whitesmoke !important;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   .search{
@@ -98,7 +97,7 @@ body {
   margin-left: -7em;
 }
   #cbList{
-    z-index: 2000;
+    /* z-index: 2000; */
     position: relative;
     padding-top: 5em;
     margin-right: -1em;
@@ -112,15 +111,6 @@ body {
     font-size: 14px;
   }
 
-  .bottomContainer {
-    border: 0;
-    z-index: 1;
-    position: relative;
-    width: 400px;
-    height: 160px;
-    padding-bottom: 22em;
-    padding-left: 3em;
-  }
 .navbar{
   background-image:url('img/YellowStripe.png') !important;
   background-repeat: no-repeat;

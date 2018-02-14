@@ -1,5 +1,6 @@
 "use strict"
 // drag and drop using HTML5 
+// https://www.html5rocks.com/en/tutorials/dnd/basics/
 
 var dragSrcEl = null;
 var movingToWindowId,currentWindowId = null
@@ -16,11 +17,11 @@ function handleDragStart(e) {
 }
 function handleDragOver(e) {
     if (e.preventDefault) {
-        e.preventDefault(); // Necessary. Allows us to drop.
+        e.preventDefault(); 
     }
     this.classList.add('over');
 
-    e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+    e.dataTransfer.dropEffect = 'move'; 
 
     return false;
 }
@@ -41,17 +42,9 @@ function handleDrop(e) {
 
     // Don't do anything if dropping the same column we're dragging.
     if (dragSrcEl != this) {
-        console.log("the same target")
-        console.log(dragSrcEl)
-        console.log(this.parentNode.parentNode)
         movingToWindowId = this.parentNode.parentNode.id;
         currentWindowId = dragSrcEl.parentNode.parentNode.id;
 
-        // console.log("movedW "+ movedWindow.id + "currentW" + currentWindow.id );
-        // Set the source column's HTML to the HTML of the column we dropped on.
-        //alert(this.outerHTML);
-        //dragSrcEl.innerHTML = this.innerHTML;
-        //this.innerHTML = e.dataTransfer.getData('text/html');
         if(currentWindowId==movingToWindowId){
             this.parentNode.removeChild(dragSrcEl);
         } else{
@@ -73,13 +66,6 @@ function handleDrop(e) {
 function handleDragEnd(e) {
     // this/e.target is the source node.
     this.classList.remove('over');
-   
-   console.log(currentWindowId);
-   console.log(movingToWindowId);
-
-//    let windowId = Number(currentWindowId!=movingToWindowId ? movingToWindowId : currentWindowId);
-    
-   console.log(movingToWindowId)
 
     let elements = $("#"+movingToWindowId).find('li');
     elements.map(function(element){
