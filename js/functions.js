@@ -26,6 +26,11 @@ function selectTab(e) {
   chrome.tabs.update(tabId, { active: true });
 }
 
+// open clicked link
+function openNewTab(e){
+  chrome.tabs.create({'url': e});
+}
+
 // close the tab
 function closeTab(e) {
   let tabId = Number(e);
@@ -111,7 +116,8 @@ function BindListenersToElements(element) {
 
   urlTexts.map(function (urlText) {
     urlText.addEventListener('click', function (e) {
-      selectTab(e.path[1].childNodes[3].id);
+      
+      selectTab(e.path[1].getElementsByClassName('cclose')[0].id);
     });
   })
 
@@ -120,5 +126,27 @@ function BindListenersToElements(element) {
       muteTab(e.path[1].lastChild.id);
     });
   })
+}
+
+function openSavedList(){
+  //  document.getElementsByClassName('container')[0].style.backgroundColor = "#f3e5a0"
+   document.getElementById('btsavedlist').style.display = 'none';
+   document.getElementById('btback').style.display = '';
+   document.getElementById('cbList').style.display = 'none';
+   let savedList = document.getElementById('cbListSaved');
+   savedList.style.display = '';
+   savedList.innerHTML = "";
+  chrome.storage.local.get(null, function (result) {
+    let allKeys = Object.keys(result);
+    generateSavedListWindow(allKeys);
+  });
+}
+
+function goBackTabList(){
+  // document.getElementsByClassName('container')[0].style.backgroundColor = ""
+  document.getElementById('btsavedlist').style.display = '';
+  document.getElementById('btback').style.display = 'none';
+  document.getElementById('cbList').style.display = '';
+  document.getElementById('cbListSaved').style.display = 'none';
 
 }

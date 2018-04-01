@@ -12,8 +12,6 @@ function handleDragStart(e) {
     e.dataTransfer.setData('text/html', this.outerHTML);
 
     this.classList.add('dragElem');
-
-    console.log("drag started..")
 }
 function handleDragOver(e) {
     if (e.preventDefault) {
@@ -37,7 +35,7 @@ function handleDragLeave(e) {
 function handleDrop(e) {
     // this/e.target is current target element.
     if (e.stopPropagation) {
-        e.stopPropagation(); // Stops some browsers from redirecting.
+        e.stopPropagation(); 
     }
 
     // Don't do anything if dropping the same column we're dragging.

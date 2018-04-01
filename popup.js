@@ -26,18 +26,29 @@ document.addEventListener('DOMContentLoaded', () => {
     windows.forEach(function (window) {
       let color = getRandomColor();
       let listId = "list_" + window.id;
+      let saveLocally = document.createElement('div');
+      let saveLocallyImg = document.createElement('img');
+      saveLocallyImg.setAttribute('src', "img/save.png");
+      saveLocallyImg.style.width = "16px";
+      saveLocallyImg.style.height = "16px";
+      saveLocallyImg.className = "savelocally";
       windowsList.push(listId);
 
       let list = document.createElement("div");
       list.setAttribute('id', listId);
       list.classList.add("listMain")
-      list.id=window.id;
+      list.id = window.id;
+      saveLocally.style.backgroundColor = "white";
+      saveLocally.style.position = "relative";
+      saveLocally.style.textAlign = "right";
+      saveLocally.appendChild(saveLocallyImg);
+      list.appendChild(saveLocally);
       cbList.appendChild(list);
 
       let ul = document.createElement("ul");
       // ul.classList.add("list");  
       ul.setAttribute('id', "list");
-      ul.setAttribute('style', 'box-shadow: 0px 0px 9px #d8d8d8;background-color: white!important;border-left: 8px solid ' + color + '!important;')
+      list.setAttribute('style', 'border-left: 8px solid ' + color + '!important;')
       list.appendChild(ul);
 
       window.tabs.forEach(function (tab) {
@@ -47,8 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let icon = document.createElement("img");
         let checkbox = document.createElement("input");
         let close = document.createElement("input");
-        li.setAttribute("draggable","true");
-        li.setAttribute("class","listItem");
+        li.setAttribute("draggable", "true");
+        li.setAttribute("class", "listItem");
         li.id = tab.index;
         icon.setAttribute("src", tab.favIconUrl);
         icon.setAttribute("width", "16");
@@ -56,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         icon.setAttribute("class", "urlIcon")
         close.setAttribute('class', 'cclose');
         urlText.setAttribute("class", "item");
-        urlText.textContent = tab.title.substring(0, 33);
+        urlText.textContent = tab.title.substring(0, 37);
         urlText.title = tab.title;
         close.value = 'x';
         close.type = 'button';
@@ -117,10 +128,19 @@ document.addEventListener('DOMContentLoaded', () => {
           search();
         });
 
-        document.getElementById("exportTabs").addEventListener('click',exportTabsFn);
-        document.getElementById("separate").addEventListener('click',separateExtFn);
+        document.getElementById("exportTabs").addEventListener('click', exportTabsFn);
+        document.getElementById("separate").addEventListener('click', separateExtFn);
+        document.getElementById('btsavedlist').addEventListener('click', openSavedList)
+        document.getElementById('btback').addEventListener('click', goBackTabList)
+        $(".savelocally").off().on('click', function (e) {
+          const selectedWindow = e.target.parentElement.parentElement;
+          const windowId = selectedWindow.id;
+          saveUrlsLocally(selectedWindow, windowId);
+          document.getElementById(windowId).getElementsByClassName('savelocally')[0].setAttribute('src', 'img/loading.gif');
+        });
       });
-    }); 
+      
+    });
   });
 });
 

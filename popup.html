@@ -2,11 +2,9 @@
 <html>
 
 <head>
+    <title>SplitUp!</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" type="text/css" href="/libs/bootstrap.min.css">
-  <title>SplitUp!</title>
-  <style type="text/css">
-  </style>
   <script src="/libs/jquery-3.2.1.min.js"></script>
   <script src="/libs/popper.min.js"></script>
   <script src="/libs/bootstrap.min.js"></script>
@@ -14,6 +12,7 @@
   <script src="/js/dragdrop.js"></script>
   <script src="/js/functions.js"></script>
   <script src="popup.js"></script>
+  <script src="/js/storage.js"></script>
 </head>
 
 <body>
@@ -30,11 +29,15 @@
         </div>
       </form>
       <div>
+      <img style="margin-left: auto; display:none"  id="btback" src="img/back.png"/>
+      <img style="margin-left: auto;" width="13px"  id="btsavedlist" src="img/bookmark.png"/>
       <img style="margin-left: auto;" id="separate" src="img/separate.png"/>
       <img width="23" height="25"  id="exportTabs" src="img/export.png" alt="export urls"/>
     </div>
     </nav>
     <div id="cbList"></div>
+    <div style="display:none" id="cbListSaved">
+    </div>
   </div>
 
   <footer style="margin-top: 5em;" >
