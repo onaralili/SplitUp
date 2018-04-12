@@ -44,6 +44,7 @@ html,body {
 .savelocally, .trashlocally {
   margin-bottom: 0%;
   margin-top: 1%;
+  margin-right: 3%;
 }
   ul{
     list-style: none;
