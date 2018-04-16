@@ -96,8 +96,8 @@ function separateExtFn() {
   chrome.windows.create({
     url: href,
     type: 'popup',
-    width: bodyRect.width,
-    height: bodyRect.height + 150,
+    width: Math.round(bodyRect.width),
+    height: Math.round(bodyRect.height + 150),
   });
 }
 
