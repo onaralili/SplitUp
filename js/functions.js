@@ -79,13 +79,20 @@ function exportTabsFn() {
         urls.push(tab.url);
       });
     });
-
     var n = urls.join("\n");
     var currentTime = new Date().toJSON().slice(0, 10);
     // save file
     var blob = new Blob([n], { type: "text/plain;charset=utf-8" });
     saveAs(blob, currentTime + "_urls.txt");
   });
+  // const aElement    = document.createElement("a");
+  //   aElement.href     = "data:text/plain;charset=UTF-8," + encodeURIComponent("textToExport");
+  //   aElement.target   = "_self";
+  //   aElement.download = "filename";
+  //   var imgEl = document.getElementById('exportTabs');
+  //   imgEl.appendChild(aElement);
+  //   aElement.click();
+  //   imgEl.removeChild(aElement);
 }
 
 
