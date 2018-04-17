@@ -136,13 +136,9 @@ function BindListenersToElements(element) {
 }
 
 function openSavedList(){
-  //  document.getElementsByClassName('container')[0].style.backgroundColor = "#f3e5a0"
    document.getElementById('btsavedlist').style.display = 'none';
    document.getElementById('btback').style.display = '';
    document.getElementById('cbList').style.display = 'none';
-   let savedList = document.getElementById('cbListSaved');
-   savedList.style.display = '';
-   savedList.innerHTML = "";
   chrome.storage.local.get(null, function (result) {
     let allKeys = Object.keys(result);
     generateSavedListWindow(allKeys);
@@ -150,7 +146,6 @@ function openSavedList(){
 }
 
 function goBackTabList(){
-  // document.getElementsByClassName('container')[0].style.backgroundColor = ""
   document.getElementById('btsavedlist').style.display = '';
   document.getElementById('btback').style.display = 'none';
   document.getElementById('cbList').style.display = '';

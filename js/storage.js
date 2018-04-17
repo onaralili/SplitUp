@@ -25,13 +25,18 @@ function guid() {
 
 // generates new window for saved links
 function generateSavedListWindow(allKeys) {
-    allKeys.map(function (key) {
-        // console.log(key);
-        chrome.storage.local.get(key, function (tabsObj) {
+    console.log(allKeys);
+    let savedList = document.getElementById('cbListSaved');
+    savedList.style.display = '';
+    if (allKeys.length > 0) {
+        savedList.innerHTML = "";
+        console.log("a")
+        allKeys.map(function (key) {
+            chrome.storage.local.get(key, function (tabsObj) {
 
                 let color = getRandomColor();
                 let listId = "list_" + key;
-                
+
                 let trashLocally = document.createElement('div');
                 let trashLocallyImg = document.createElement('img');
                 trashLocallyImg.setAttribute('src', "img\\trash.png");
@@ -39,7 +44,7 @@ function generateSavedListWindow(allKeys) {
                 trashLocallyImg.style.height = "16px";
                 trashLocallyImg.className = "trashlocally";
                 // windowsList.push(listId);
-                trashLocallyImg.addEventListener('click', function(e){
+                trashLocallyImg.addEventListener('click', function (e) {
                     removeWindow(e.target.parentElement.parentElement.id);
                 });
                 let list = document.createElement("div");
@@ -58,7 +63,7 @@ function generateSavedListWindow(allKeys) {
                 list.setAttribute('style', 'border-left: 8px solid ' + color + '!important;')
                 list.appendChild(ul);
 
-               
+
                 for (const key of Object.keys(tabsObj)) {
                     console.log(tabsObj[key]);
                     tabsObj[key].forEach(tab => {
@@ -70,6 +75,7 @@ function generateSavedListWindow(allKeys) {
                         li.setAttribute("draggable", "true");
                         li.setAttribute("class", "listItem");
                         li.id = tab.index;
+                        // TODO: possible bug here, could be undefined favicon url
                         icon.setAttribute("src", tab.favIconUrl);
                         icon.setAttribute("width", "16");
                         icon.setAttribute("height", "16");
@@ -80,7 +86,7 @@ function generateSavedListWindow(allKeys) {
                         urlText.title = tab.title;
                         urlText.addEventListener('click', function (e) {
                             openNewTab(e.target.previousSibling.previousSibling.value);
-                          });
+                        });
                         // close.value = 'x';
                         // close.type = 'button';
                         // close.style.fontWeight = 'bold';
@@ -97,14 +103,17 @@ function generateSavedListWindow(allKeys) {
                         ul.appendChild(li);
                     });
                 }
+            })
         })
-    })
+    } else{
+        console.log("test")
+        savedList.innerHTML = "<center><p style='background-color:#e74132; color:white; font-wieght:600;'>such a lonely session page, save some tabs</p></center>"
+    }
 }
 
 // remove locally saved urls
-function removeWindow(key){
-    console.log(key)
+function removeWindow(key) {
     chrome.storage.local.remove(key, function (result) {
-      $("#"+key).remove();
+        $("#" + key).remove();
     });
-  }
+}
