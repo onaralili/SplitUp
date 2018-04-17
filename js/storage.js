@@ -65,7 +65,6 @@ function generateSavedListWindow(allKeys) {
 
 
                 for (const key of Object.keys(tabsObj)) {
-                    console.log(tabsObj[key]);
                     tabsObj[key].forEach(tab => {
                         let li = document.createElement("li");
                         let urlText = document.createElement("span");
@@ -76,7 +75,11 @@ function generateSavedListWindow(allKeys) {
                         li.setAttribute("class", "listItem");
                         li.id = tab.index;
                         // TODO: possible bug here, could be undefined favicon url
-                        icon.setAttribute("src", tab.favIconUrl);
+                        if (tab.favIconUrl !== undefined) {
+                             icon.setAttribute("src", tab.favIconUrl);
+                        } else{
+                            icon.setAttribute("src","");
+                        }
                         icon.setAttribute("width", "16");
                         icon.setAttribute("height", "16");
                         icon.setAttribute("class", "urlIcon")
