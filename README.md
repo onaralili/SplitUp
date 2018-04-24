@@ -11,7 +11,8 @@
 - [x]  Save sessions locally
 - [ ]  Port to Firefox
 - [ ]  Keyboard shortcuts
-- [ ]  Local save password protection
+- [ ]  Password protection for saved session page
+- [ ]  Cloud Synchronization  
 
 
 
