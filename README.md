@@ -8,10 +8,10 @@
   Constantly updated and open to any contribution or feedback! </center>
 
 ### TODO
--[x] Save locally
--[]  Port to Firefox
--[]  Keyboard shortcuts
--[]  Local save password protection
+- [x] Save locally
+- [ ]  Port to Firefox
+- [ ]  Keyboard shortcuts
+- [ ]  Local save password protection
 
 
 
