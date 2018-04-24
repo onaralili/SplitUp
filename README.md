@@ -6,7 +6,15 @@
 <p>
 <center>Have FUN organizing & saving your tabs & windows with the ultimate Tab Manager.
   Constantly updated and open to any contribution or feedback! </center>
-  
+
+### TODO
+-[x] Save locally
+-[]  Port to Firefox
+-[]  Keyboard shortcuts
+-[]  Local save password protection
+
+
+
 ### Install
 <a href="https://chrome.google.com/webstore/detail/splitup/bhoodecbejheonelhikcfahgpgahffmf"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png" width="48" /></a>
 
