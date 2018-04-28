@@ -14,7 +14,7 @@
 - [ ]  Password protection for saved session page
 - [ ]  Cloud Synchronization  
 
-
+[Start a new issue](https://github.com/onaralili/SplitUp/issues)
 
 ### Install
 <a href="https://chrome.google.com/webstore/detail/splitup/bhoodecbejheonelhikcfahgpgahffmf"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png" width="48" /></a>
