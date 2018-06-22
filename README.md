@@ -7,7 +7,6 @@
 <center>Have FUN organizing & saving your tabs & windows with the ultimate Tab Manager.
   Constantly updated and open to any contribution or feedback! </center>
 
-
 [Start a new issue](https://github.com/onaralili/SplitUp/issues)
 
 ### Install
