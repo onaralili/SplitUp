@@ -7,12 +7,6 @@
 <center>Have FUN organizing & saving your tabs & windows with the ultimate Tab Manager.
   Constantly updated and open to any contribution or feedback! </center>
 
-### TODO
-- [x]  Save sessions locally
-- [ ]  Port to Firefox
-- [ ]  Keyboard shortcuts
-- [ ]  Password protection for saved session page
-- [ ]  Cloud Synchronization  
 
 [Start a new issue](https://github.com/onaralili/SplitUp/issues)
 
