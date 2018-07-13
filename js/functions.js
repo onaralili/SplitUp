@@ -36,8 +36,8 @@ function closeTab(e) {
   let tabId = Number(e);
   chrome.tabs.remove(tabId);
   $("#" + e).parent().remove();
-  e.stopPropagation();
-  e.preventDefault();
+  // e.stopPropagation();
+  // e.preventDefault();
 }
 
 

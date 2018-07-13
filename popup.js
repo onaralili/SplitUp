@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   var btSplitUp = document.querySelector(".splitUpBt");
   var urlList = [];
+  var removeList = [];
   var windowsList = [];
   btSplitUp.addEventListener('click', () => {
 
@@ -9,8 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     checkedBoxes.forEach(function (e) {
       urlList.push(e.value);
+      removeList.push(e.parentElement.lastChild.id)
     })
-
+    
     //creates a window
     if (urlList != null) {
       chrome.windows.create({
@@ -18,6 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
         type: "normal"
       });
     }
+
+    // remove moved tabs from the current window
+    for (let index = 0; index < removeList.length; index++) {
+      closeTab(removeList[index])
+    }
+    console.log(removeList)
   })
 
   chrome.windows.getAll({ populate: true }, function (windows) {
