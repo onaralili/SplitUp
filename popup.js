@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       urlList.push(e.value);
       removeList.push(e.parentElement.lastChild.id)
     })
-    
+
     //creates a window
     if (urlList != null) {
       chrome.windows.create({
@@ -36,10 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
       let listId = "list_" + window.id;
       let saveLocally = document.createElement('div');
       let saveLocallyImg = document.createElement('img');
+      let closeWindow = document.createElement('img');
       saveLocallyImg.setAttribute('src', "img/save.png");
       saveLocallyImg.style.width = "16px";
       saveLocallyImg.style.height = "16px";
       saveLocallyImg.className = "savelocally";
+      closeWindow.setAttribute('src', "img/trash.png");
+      closeWindow.style.width = "16px";
+      closeWindow.style.height = "16px";
+      closeWindow.className = "closeWindow";
+      closeWindow.style.marginBottom = "0";
+      closeWindow.style.marginRight = "0.3em";
       windowsList.push(listId);
 
       let list = document.createElement("div");
@@ -49,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
       saveLocally.style.backgroundColor = "white";
       saveLocally.style.position = "relative";
       saveLocally.style.textAlign = "right";
+      saveLocally.appendChild(closeWindow);
       saveLocally.appendChild(saveLocallyImg);
       list.appendChild(saveLocally);
       cbList.appendChild(list);
@@ -146,8 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
           saveUrlsLocally(selectedWindow, windowId);
           document.getElementById(windowId).getElementsByClassName('savelocally')[0].setAttribute('src', 'img/loading.gif');
         });
+        $(".closeWindow").off().on('click', function (e) {
+          const selectedWindow = e.target.parentElement.parentElement;
+          const windowId = Number(selectedWindow.id);
+          if (confirm("Close this window?")) {
+            chrome.windows.remove(windowId);
+            document.getElementById(windowId).remove();
+          } 
+        });
       });
-      
     });
   });
 });

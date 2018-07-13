@@ -36,8 +36,6 @@ function closeTab(e) {
   let tabId = Number(e);
   chrome.tabs.remove(tabId);
   $("#" + e).parent().remove();
-  // e.stopPropagation();
-  // e.preventDefault();
 }
 
 
@@ -85,14 +83,6 @@ function exportTabsFn() {
     var blob = new Blob([n], { type: "text/plain;charset=utf-8" });
     saveAs(blob, currentTime + "_urls.txt");
   });
-  // const aElement    = document.createElement("a");
-  //   aElement.href     = "data:text/plain;charset=UTF-8," + encodeURIComponent("textToExport");
-  //   aElement.target   = "_self";
-  //   aElement.download = "filename";
-  //   var imgEl = document.getElementById('exportTabs');
-  //   imgEl.appendChild(aElement);
-  //   aElement.click();
-  //   imgEl.removeChild(aElement);
 }
 
 
