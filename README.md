@@ -7,7 +7,7 @@
 <center>Have FUN organizing & saving your tabs & windows with the ultimate Tab Manager.
   Constantly updated and open to any contribution or feedback! </center>
 
-[Start a new issue](https://github.com/onaralili/SplitUp/issues)
+[Start a new issue](https://github.com/onaralili/SplitUp/issues/new)
 
 ### Install
 <a href="https://chrome.google.com/webstore/detail/splitup/bhoodecbejheonelhikcfahgpgahffmf"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png" width="48" /></a>
