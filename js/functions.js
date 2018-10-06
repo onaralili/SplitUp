@@ -58,7 +58,18 @@ function search() {
   }
 }
 
-
+function getSelectedTabs(){
+  var lists = [];
+  var urlList = [];
+  var removeList = [];
+  var checkedBoxes = document.querySelectorAll('input[name=urlcb]:checked');
+  checkedBoxes.forEach(function (e) {
+    urlList.push(e.value);
+    removeList.push(e.parentElement.lastChild.id)
+  });
+  lists.push(urlList,removeList);
+  return lists;
+}
 // function pinTab(e){
 //   let tabId = Number(e);
 //   chrome.tabs.get(tabId,function(tab){ 

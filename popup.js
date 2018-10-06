@@ -1,31 +1,21 @@
 "use strict"
 document.addEventListener('DOMContentLoaded', () => {
   var btSplitUp = document.querySelector(".splitUpBt");
-  var urlList = [];
-  var removeList = [];
   var windowsList = [];
   btSplitUp.addEventListener('click', () => {
 
-    var checkedBoxes = document.querySelectorAll('input[name=urlcb]:checked');
-
-    checkedBoxes.forEach(function (e) {
-      urlList.push(e.value);
-      removeList.push(e.parentElement.lastChild.id)
-    })
-
+   var lists = getSelectedTabs();
     //creates a window
-    if (urlList != null) {
+    if (lists[0] != null) {
       chrome.windows.create({
-        url: urlList,
+        url: lists[0],
         type: "normal"
       });
     }
-
     // remove moved tabs from the current window
-    for (let index = 0; index < removeList.length; index++) {
-      closeTab(removeList[index])
+    for (let index = 0; index < lists[1].length; index++) {
+      closeTab(lists[1][index])
     }
-    console.log(removeList)
   })
 
   chrome.windows.getAll({ populate: true }, function (windows) {
@@ -155,12 +145,19 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById(windowId).getElementsByClassName('savelocally')[0].setAttribute('src', 'img/loading.gif');
         });
         $(".closeWindow").off().on('click', function (e) {
-          const selectedWindow = e.target.parentElement.parentElement;
-          const windowId = Number(selectedWindow.id);
-          if (confirm("Close this window?")) {
-            chrome.windows.remove(windowId);
-            document.getElementById(windowId).remove();
-          } 
+          var selectedTabs = getSelectedTabs();
+          if (selectedTabs[1].length > 0){
+            selectedTabs[1].forEach(function(tab){
+              closeTab(tab);
+            })
+          } else  {
+            const selectedWindow = e.target.parentElement.parentElement;
+            const windowId = Number(selectedWindow.id);
+            if (confirm("Close this window?")) {
+              chrome.windows.remove(windowId);
+              document.getElementById(windowId).remove();
+            } 
+          }
         });
       });
     });
