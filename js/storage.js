@@ -1,18 +1,37 @@
 function saveUrlsLocally(window, windowId) {
+    var selectedTabs = getSelectedTabs(true);
     chrome.windows.get(Number(windowId), { populate: true }, function (tab) {
         const uuid = guid();
         let setObj = [];
-        setObj[uuid] = tab.tabs;
-        var arrayToObject = Object.assign({}, setObj);
-        chrome.storage.local.set(arrayToObject, function (e) {
-            setTimeout(function () {
-                let element = document.getElementById(windowId).getElementsByClassName('savelocally');
-                element[0].setAttribute('src', 'img/save.png')
-            }, 1000);
-        });
+        try {
+            setObj[uuid] = tab.tabs;
+            if (selectedTabs[1].length > 0) {
+                setObj[uuid].forEach(function (tab) {
+                    console.log(tab.id)
+                    console.log(selectedTabs[1])
+                    if (!selectedTabs[1].includes(tab.id.toString())) {
+                        setObj[uuid] = remove(setObj[uuid], tab);
+                    }
+                })
+            }
+        } catch (err) {
+            throw new Error(err);
+        } finally {
+            var arrayToObject = Object.assign({}, setObj);
+            chrome.storage.local.set(arrayToObject, function (e) {
+                setTimeout(function () {
+                    let element = document.getElementById(windowId).getElementsByClassName('savelocally');
+                    element[0].setAttribute('src', 'img/save.png')
+                }, 1000);
+            });
+        }
+
     })
 }
-
+// remove element from the array
+function remove(array, element) {
+    return array.filter(e => e !== element);
+}
 // generate random uuid
 function guid() {
     function s4() {

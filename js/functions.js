@@ -58,7 +58,7 @@ function search() {
   }
 }
 
-function getSelectedTabs(){
+function getSelectedTabs(shouldUncheck) {
   var lists = [];
   var urlList = [];
   var removeList = [];
@@ -66,8 +66,11 @@ function getSelectedTabs(){
   checkedBoxes.forEach(function (e) {
     urlList.push(e.value);
     removeList.push(e.parentElement.lastChild.id)
+    if (shouldUncheck){
+      e.checked = false;
+    }
   });
-  lists.push(urlList,removeList);
+  lists.push(urlList, removeList);
   return lists;
 }
 // function pinTab(e){
