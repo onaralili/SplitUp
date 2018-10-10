@@ -134,7 +134,9 @@ html,body {
   from {transform:rotate(0deg);}
   to {transform:rotate(4deg);}
 }
-  
+.splitUpBt{
+    cursor:pointer
+}
 .splitUpBt:hover .pinch1{
   animation: spin 1s infinite cubic-bezier(0.3, 0.76, 0.53, 0.92);
   transform-origin: 90% 50%;
