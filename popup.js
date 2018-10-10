@@ -27,10 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
       let saveLocally = document.createElement('div');
       let saveLocallyImg = document.createElement('img');
       let closeWindow = document.createElement('img');
+      let selectAll = document.createElement('img');
+
       saveLocallyImg.setAttribute('src', "img/save.png");
       saveLocallyImg.style.width = "16px";
       saveLocallyImg.style.height = "16px";
       saveLocallyImg.className = "savelocally";
+      selectAll.setAttribute('src', "img/select.png");
+      selectAll.style.width = "16px";
+      selectAll.style.height = "16px";
+      selectAll.title = "Select all"
+      selectAll.className = "selectAll";
+      selectAll.style.marginBottom = "-1px";
+      selectAll.style.marginRight = "0.3em";
       closeWindow.setAttribute('src', "img/trash.png");
       closeWindow.style.width = "16px";
       closeWindow.style.height = "16px";
@@ -46,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
       saveLocally.style.backgroundColor = "white";
       saveLocally.style.position = "relative";
       saveLocally.style.textAlign = "right";
+      saveLocally.appendChild(selectAll);
       saveLocally.appendChild(closeWindow);
       saveLocally.appendChild(saveLocallyImg);
       list.appendChild(saveLocally);
@@ -143,6 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
           const windowId = selectedWindow.id;
           saveUrlsLocally(selectedWindow, windowId);
           document.getElementById(windowId).getElementsByClassName('savelocally')[0].setAttribute('src', 'img/loading.gif');
+        });
+        $(".selectAll").off().on('click', function (e) {
+            $("#list .cb").prop( "checked", true );
         });
         $(".closeWindow").off().on('click', function (e) {
           var selectedTabs = getSelectedTabs();
