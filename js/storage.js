@@ -63,6 +63,7 @@ function generateSavedListWindow(allKeys) {
                 trashLocallyImg.style.width = "16px";
                 trashLocallyImg.style.height = "16px";
                 trashLocallyImg.className = "trashlocally";
+                trashLocallyImg.title="Remove from Bookmarks"
                 
                 selectAll.setAttribute('src', "img/select.png");
                 selectAll.style.width = "16px";

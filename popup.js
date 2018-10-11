@@ -31,12 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
       saveLocallyImg.style.width = "16px";
       saveLocallyImg.style.height = "16px";
       saveLocallyImg.className = "savelocally";
+      saveLocally.title="Save to Bookmarks";
       closeWindow.setAttribute('src', "img/trash.png");
       closeWindow.style.width = "16px";
       closeWindow.style.height = "16px";
       closeWindow.className = "closeWindow";
       closeWindow.style.marginBottom = "0";
       closeWindow.style.marginRight = "0.3em";
+      closeWindow.title="Close Window";
       windowsList.push(listId);
 
       let list = document.createElement("div");
