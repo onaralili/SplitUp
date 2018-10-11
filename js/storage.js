@@ -70,7 +70,7 @@ function generateSavedListWindow(allKeys) {
                 selectAll.title = "Select all";
                 selectAll.className = "selectAll";
                 selectAll.style.marginBottom = "-1px";
-                selectAll.style.marginRight = "0.3em";
+                selectAll.style.marginRight = "0.2em";
                 selectAll.addEventListener('click',function(e){
                     
                   let savedListDOM=e.target.parentNode.parentNode.lastChild;
