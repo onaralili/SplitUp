@@ -58,10 +58,28 @@ function generateSavedListWindow(allKeys) {
 
                 let trashLocally = document.createElement('div');
                 let trashLocallyImg = document.createElement('img');
+                let selectAll = document.createElement('img');
                 trashLocallyImg.setAttribute('src', "img\\trash.png");
                 trashLocallyImg.style.width = "16px";
                 trashLocallyImg.style.height = "16px";
                 trashLocallyImg.className = "trashlocally";
+                
+                selectAll.setAttribute('src', "img/select.png");
+                selectAll.style.width = "16px";
+                selectAll.style.height = "16px";
+                selectAll.title = "Select all";
+                selectAll.className = "selectAll";
+                selectAll.style.marginBottom = "-1px";
+                selectAll.style.marginRight = "0.3em";
+                selectAll.addEventListener('click',function(e){
+                    
+                  let savedListDOM=e.target.parentNode.parentNode.lastChild;
+                let lp=savedListDOM.childNodes;
+                    for(var i=0;i<lp.length;i++){
+                        lp[i].firstChild.click();
+                    }
+                   
+                });
                 // windowsList.push(listId);
                 trashLocallyImg.addEventListener('click', function (e) {
                     removeWindow(e.target.parentElement.parentElement.id);
@@ -73,6 +91,7 @@ function generateSavedListWindow(allKeys) {
                 trashLocally.style.backgroundColor = "white";
                 trashLocally.style.position = "relative";
                 trashLocally.style.textAlign = "right";
+                trashLocally.appendChild(selectAll);
                 trashLocally.appendChild(trashLocallyImg);
                 list.appendChild(trashLocally);
                 cbListSaved.appendChild(list);
@@ -132,10 +151,12 @@ function generateSavedListWindow(allKeys) {
         savedList.innerHTML = "<center><p style='background-color:#e74132; color:white; font-wieght:600;'>such a lonely session page, save some tabs</p></center>"
     }
 }
-
 // remove locally saved urls
 function removeWindow(key) {
     chrome.storage.local.remove(key, function (result) {
         $("#" + key).remove();
     });
+    
+    
+    
 }
