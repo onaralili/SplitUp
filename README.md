@@ -9,6 +9,8 @@
 
 [Start a new issue](https://github.com/onaralili/SplitUp/issues/new)
 
+[Leave a review on the web store](https://chrome.google.com/webstore/detail/splitup-tab-manager/bhoodecbejheonelhikcfahgpgahffmf)
+
 ### Install
 <a href="https://chrome.google.com/webstore/detail/splitup/bhoodecbejheonelhikcfahgpgahffmf"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png" width="48" /></a>
 
