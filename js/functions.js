@@ -45,17 +45,31 @@ function search() {
   input = document.getElementsByClassName('search');
   filter = input[0].value.toUpperCase();
   ul = document.getElementsByClassName("listMain");
-  for (let t = 0; t < ul.length; t++) {
+  for (let t = 0; t < ul.length; t++) 
+  {
     li = ul[t].getElementsByTagName('li');
-    for (let i = 0; i < li.length; i++) {
+      var hideDiv=true;
+      ul[t].style.display="block";
+    for (let i = 0; i < li.length; i++) 
+    {
       a = li[i].getElementsByTagName("span")[0];
-      if (a.title.toUpperCase().indexOf(filter) > -1) {
+      if (a.title.toUpperCase().indexOf(filter) > -1) 
+      {
+          hideDiv=false;
         li[i].style.display = "";
-      } else {
+      } 
+      else 
+      {
         li[i].style.display = "none";
       }
     }
+      if(hideDiv==true){
+         ul[t].style.display="none"; 
+      }
   }
+    
+    
+    
 }
 
 function getSelectedTabs(shouldUncheck) {
