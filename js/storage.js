@@ -44,7 +44,6 @@ function guid() {
 
 // generates new window for saved links
 function generateSavedListWindow(allKeys) {
-    console.log(allKeys);
     let savedList = document.getElementById('cbListSaved');
     savedList.style.display = '';
     if (allKeys.length > 0) {
@@ -80,7 +79,6 @@ function generateSavedListWindow(allKeys) {
                     }
 
                 });
-                // windowsList.push(listId);
                 trashLocallyImg.addEventListener('click', function (e) {
                     removeWindow(e.target.parentElement.parentElement.id);
                 });
@@ -109,7 +107,6 @@ function generateSavedListWindow(allKeys) {
                         let icon = document.createElement("img");
                         let close = document.createElement("input");
                         let checkbox = document.createElement("input");
-                        // let close = document.createElement("input");
                         li.setAttribute("draggable", "true");
                         li.setAttribute("class", "listItem");
                         close.setAttribute('class', 'trashLocalTab');
@@ -129,17 +126,12 @@ function generateSavedListWindow(allKeys) {
                         icon.setAttribute("width", "16");
                         icon.setAttribute("height", "16");
                         icon.setAttribute("class", "urlIcon")
-                        // close.setAttribute('class', 'cclose');
                         urlText.setAttribute("class", "saveditem");
                         urlText.textContent = tab.title.substring(0, 33);
                         urlText.title = tab.title;
                         urlText.addEventListener('click', function (e) {
                             openNewTab(e.target.previousSibling.previousSibling.value);
                         });
-                        // close.value = 'x';
-                        // close.type = 'button';
-                        // close.style.fontWeight = 'bold';
-                        // close.id = tab.id;
                         checkbox.setAttribute("type", "checkbox");
                         checkbox.setAttribute("name", "urlcb");
                         checkbox.setAttribute("class", "cb");
@@ -149,7 +141,6 @@ function generateSavedListWindow(allKeys) {
                         li.appendChild(icon);
                         li.appendChild(urlText);
                         li.appendChild(close);
-                        // li.appendChild(close);
                         ul.appendChild(li);
                     });
                 }
@@ -161,39 +152,34 @@ function generateSavedListWindow(allKeys) {
     }
 }
 function removeTabLocally(event) {
-    let itemClicked=event.target.parentElement.getAttribute("id");
-    let windowClicked=event.target.parentElement.parentElement.parentElement.getAttribute("id")
-    // console.log("Item clicked: "+itemClicked+"\n Window Clicked: "+windowClicked);
-    chrome.storage.local.get(windowClicked,function(resultObj){
-        resultTabs=resultObj[windowClicked];
-        //console.log(resultTabs);
-        // console.log("\nTo delete: "+resultTabs[itemClicked]);
-        for(var i=0;i<resultTabs.length;i++){
-            if(resultTabs[i].index==itemClicked){
-                resultTabs.splice(i,1);
+    let itemClicked = event.target.parentElement.getAttribute("id");
+    let windowClicked = event.target.parentElement.parentElement.parentElement.getAttribute("id")
+    chrome.storage.local.get(windowClicked, function (resultObj) {
+        resultTabs = resultObj[windowClicked];
+        for (var i = 0; i < resultTabs.length; i++) {
+            if (resultTabs[i].index == itemClicked) {
+                resultTabs.splice(i, 1);
                 break;
             }
         }
-        //resultTabs.splice(itemClicked,1);
-        var freshWindow=resultTabs;
-    chrome.storage.local.remove(windowClicked);
-        let saveObj={};
-        saveObj[windowClicked]=freshWindow;
+        var freshWindow = resultTabs;
+        chrome.storage.local.remove(windowClicked);
+        if (freshWindow.length == 0) {
+            document.getElementById(windowClicked).parentNode.removeChild(windowDOM);
+        } else {
+            let saveObj = {};
+            saveObj[windowClicked] = freshWindow;
             chrome.storage.local.set(saveObj);
-            if(freshWindow.length==0){
-                chrome.storage.local.remove(windowClicked);
-                document.getElementById(windowClicked).parentNode.removeChild(windowDOM);
-            }
+        }
     });
-    let windowDOM=document.getElementById(windowClicked);
-    let tabDOM=event.target.parentElement;
+    let windowDOM = document.getElementById(windowClicked);
+    let tabDOM = event.target.parentElement;
     windowDOM.lastChild.removeChild(tabDOM);
 }
 
 // remove locally saved urls
 function removeWindow(key) {
-   // console.log(key);
-    chrome.storage.local.remove(key, function (result) {
+    chrome.storage.local.remove(key, function () {
         $("#" + key).remove();
     });
 
