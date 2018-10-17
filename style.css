@@ -1,161 +1,178 @@
 html,body {
-    margin: 0;
-    width: 400px;
-    background-color: whitesmoke !important;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
+  margin: 0;
+  width: 400px;
+  background-color: whitesmoke !important;
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
-  .search{
-    border-radius: 9em !important;
-    border-style: hidden !important;
-  }
+.search{
+  border-radius: 9em !important;
+  border-style: hidden !important;
+}
 
-  .search:focus{
-    outline-style:none !important;
-    box-shadow:none !important;
-    border-color:transparent !important;
-  }
+.search:focus{
+  outline-style:none !important;
+  box-shadow:none !important;
+  border-color:transparent !important;
+}
 
 
-  input[type="search"]::-webkit-input-placeholder {
-    color: #d2d2d2;
-  }
+input[type="search"]::-webkit-input-placeholder {
+  color: #d2d2d2;
+}
 
-  .inner-addon { 
-    position: relative; 
-    width: 10em;
+.inner-addon { 
+  position: relative; 
+  width: 10em;
 }
 
 #i-search {
-  position: absolute;
-  padding: 6px;
-  pointer-events: none;
+position: absolute;
+padding: 6px;
+pointer-events: none;
 }
 /* align icon */
 #i-search { left:  0px;}
 
 /* add padding  */
 .left-addon input  { 
-  padding-left:  32px;
-  padding-bottom: 0em; 
-  padding-top: 0em;
+padding-left:  32px;
+padding-bottom: 0em; 
+padding-top: 0em;
 }
 .savelocally, .trashlocally {
-  margin-bottom: 0%;
-  margin-top: 1%;
-  margin-right: 3%;
+margin-bottom: 0%;
+margin-top: 1%;
+margin-right: 3%;
 }
-  ul{
-    list-style: none;
-  }
-  .listMain {
-    box-shadow: 0px 0px 9px #d8d8d8;
-    background-color: white
-  }
-  .cclose{
-    background: transparent;
-    color: red;
-    border:0;
-    outline: 0;
-    font-size: 1em !important;
-    display: none;
-  }
-
-  .cclose:hover {
-  color: lightcoral;
+ul{
+  list-style: none;
+}
+.listMain {
+  box-shadow: 0px 0px 9px #d8d8d8;
+  background-color: white
+}
+.cclose{
+  background: transparent;
+  color: red;
+  border:0;
+  outline: 0;
+  font-size: 1em !important;
+  display: none;
 }
 
-  li:hover .cclose{
-    display: inline;
-  }
+.cclose:hover {
+color: lightcoral;
+}
 
-  li:hover{
-   cursor: pointer;
-  }
+.trashLocalTab{
+  background: transparent;
+  color: red;
+  border:0;
+  outline: 0;
+  font-size: 1em !important;
+  display: none;
+}
 
-  img{
-    margin-left: 0.4em;
-    margin-right: 0.4em;
-    margin-bottom: -0.3em;
-    vertical-align: initial !important;
-  }
+.trashLocalTab:hover {
+color: lightcoral;
+}
 
-  .audio{
-    margin-left: -1.4em;
-  }
+li:hover .cclose{
+  display: inline;
+}
 
-  #list{
-    padding-left: 1.8em;
-  }
+li:hover .trashLocalTab{
+  display: inline;
+}
 
-  .navbar-brand {
-  margin-right: 0 !important;
- 
+li:hover{
+ cursor: pointer;
+}
+
+img{
+  margin-left: 0.4em;
+  margin-right: 0.4em;
+  margin-bottom: -0.3em;
+  vertical-align: initial !important;
+}
+
+.audio{
+  margin-left: -1.4em;
+}
+
+#list{
+  padding-left: 1.8em;
+}
+
+.navbar-brand {
+margin-right: 0 !important;
+
 }
 
 #exportTabs{
-  width: 1.3em;
-  height: 1.3em;
-  margin-left: 0em;
+width: 1.3em;
+height: 1.3em;
+margin-left: 0em;
 }
 #separate{
-  width: 1.3em;
-  height: 1.3em;
-  margin-left: -7em;
+width: 1.3em;
+height: 1.3em;
+margin-left: -7em;
 }
-  #cbList,#cbListSaved{
-    /* z-index: 2000; */
-    position: relative;
-    padding-top: 5em;
-    margin-right: -1em;
-    padding-bottom: 0.5em;
-  }
-  .container{
-    padding-left: 0px !important;
-  }
-  
-  .item{
-    font-size: 14px;
-  }
+#cbList,#cbListSaved{
+  /* z-index: 2000; */
+  position: relative;
+  padding-top: 5em;
+  margin-right: -1em;
+  padding-bottom: 0.5em;
+}
+.container{
+  padding-left: 0px !important;
+}
+
+.item{
+  font-size: 14px;
+}
 
 .navbar{
-  background-image:url('img/YellowStripe.png') !important;
-  background-repeat: no-repeat;
-  background-size: 100%;
+background-image:url('img/YellowStripe.png') !important;
+background-repeat: no-repeat;
+background-size: 100%;
 }
 
 /* pinchers animation pinches */
 @keyframes spin {
-  from {transform:rotate(0deg);}
-  to {transform:rotate(-2deg);}
+from {transform:rotate(0deg);}
+to {transform:rotate(-2deg);}
 }
 @keyframes spinPinch2 {
-  from {transform:rotate(0deg);}
-  to {transform:rotate(4deg);}
+from {transform:rotate(0deg);}
+to {transform:rotate(4deg);}
 }
 .splitUpBt{
-    cursor:pointer
+  cursor:pointer
 }
 .splitUpBt:hover .pinch1{
-  animation: spin 1s infinite cubic-bezier(0.3, 0.76, 0.53, 0.92);
-  transform-origin: 90% 50%;
+animation: spin 1s infinite cubic-bezier(0.3, 0.76, 0.53, 0.92);
+transform-origin: 90% 50%;
 }
 
 .splitUpBt:hover .pinch2{
-  animation: spinPinch2 1s infinite cubic-bezier(0.3, 0.76, 0.53, 0.92);
-  transform-origin: 90% 50%;
+animation: spinPinch2 1s infinite cubic-bezier(0.3, 0.76, 0.53, 0.92);
+transform-origin: 90% 50%;
 }
 
 [draggable] {
-  user-select: none;
+user-select: none;
 }
 
 .listItem.over {
-  border-top: 2px solid #fdc80f;
+border-top: 2px solid #fdc80f;
 }
 
 .bottomContainer{
-  margin-top: 1em;
+margin-top: 1em;
 }
 
