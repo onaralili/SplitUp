@@ -158,28 +158,40 @@ function generateSavedListWindow(allKeys) {
             })
         })
     } else{
-        console.log("test")
+        //console.log("test")
         savedList.innerHTML = "<center><p style='background-color:#e74132; color:white; font-wieght:600;'>such a lonely session page, save some tabs</p></center>"
     }
 }
 function removeTabLcoally(event){
     let itemClicked=event.target.parentElement.getAttribute("id");
     let windowClicked=event.target.parentElement.parentElement.parentElement.getAttribute("id")
-    console.log("Item clicked: "+itemClicked+"\n Window Clicked: "+windowClicked);
+    // console.log("Item clicked: "+itemClicked+"\n Window Clicked: "+windowClicked);
 
     chrome.storage.local.get(windowClicked,function(resultObj){
         resultTabs=resultObj[windowClicked];
-        console.log(resultTabs);
-        resultTabs.splice(itemClicked,1);
+        //console.log(resultTabs);
+        // console.log("\nTo delete: "+resultTabs[itemClicked]);
+        for(var i=0;i<resultTabs.length;i++){
+            if(resultTabs[i].index==itemClicked){
+                resultTabs.splice(i,1);
+                break;
+            }
+        }
+        //resultTabs.splice(itemClicked,1);
         var freshWindow=resultTabs;
         
-    console.log("\nTo delete: "+resultTabs[itemClicked]);
+    
    
     chrome.storage.local.remove(windowClicked);
         let saveObj={};
         saveObj[windowClicked]=freshWindow;
             chrome.storage.local.set(saveObj);
+            if(freshWindow.length==0){
+                chrome.storage.local.remove(windowClicked);
+                document.getElementById(windowClicked).parentNode.removeChild(windowDOM);
+            }
     });
+    
     let windowDOM=document.getElementById(windowClicked);
     let tabDOM=event.target.parentElement;
     windowDOM.lastChild.removeChild(tabDOM);
@@ -187,7 +199,7 @@ function removeTabLcoally(event){
 
 // remove locally saved urls
 function removeWindow(key) {
-    console.log(key);
+   // console.log(key);
     chrome.storage.local.remove(key, function (result) {
         $("#" + key).remove();
     });
