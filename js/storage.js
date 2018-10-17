@@ -80,7 +80,10 @@ function generateSavedListWindow(allKeys) {
 
                 });
                 trashLocallyImg.addEventListener('click', function (e) {
-                    removeWindow(e.target.parentElement.parentElement.id);
+                    var result = confirm("This will remove entire window, proceed?");
+                    if (result) {
+                        removeWindow(e.target.parentElement.parentElement.id);
+                    }
                 });
                 let list = document.createElement("div");
                 list.setAttribute('id', listId);
