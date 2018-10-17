@@ -52,7 +52,7 @@ function generateSavedListWindow(allKeys) {
         console.log("a")
         allKeys.map(function (key) {
             chrome.storage.local.get(key, function (tabsObj) {
-
+                
                 let color = getRandomColor();
                 let listId = "list_" + key;
 
@@ -71,7 +71,7 @@ function generateSavedListWindow(allKeys) {
                 selectAll.title = "Select all";
                 selectAll.className = "selectAll";
                 selectAll.style.marginBottom = "-1px";
-                selectAll.style.marginRight = "0.2em";
+                selectAll.style.marginRight = "0.3em";
                 selectAll.addEventListener('click',function(e){
                     
                   let savedListDOM=e.target.parentNode.parentNode.lastChild;
@@ -108,11 +108,20 @@ function generateSavedListWindow(allKeys) {
                         let li = document.createElement("li");
                         let urlText = document.createElement("span");
                         let icon = document.createElement("img");
+                         let close = document.createElement("input");
                         let checkbox = document.createElement("input");
                         // let close = document.createElement("input");
                         li.setAttribute("draggable", "true");
                         li.setAttribute("class", "listItem");
+                        close.setAttribute('class', 'trashLocalTab');
+                        close.value = 'x';
+                        close.type = 'button';
+                        close.style.fontWeight = 'bold';
+                        close.id = tab.id;
                         li.id = tab.index;
+                        close.addEventListener('click',function(event){
+                            removeTabLcoally(event);
+                        })
                         // TODO: possible bug here, could be undefined favicon url
                         if (tab.favIconUrl !== undefined) {
                              icon.setAttribute("src", tab.favIconUrl);
@@ -141,6 +150,7 @@ function generateSavedListWindow(allKeys) {
                         li.appendChild(checkbox);
                         li.appendChild(icon);
                         li.appendChild(urlText);
+                        li.appendChild(close);
                         // li.appendChild(close);
                         ul.appendChild(li);
                     });
@@ -152,8 +162,32 @@ function generateSavedListWindow(allKeys) {
         savedList.innerHTML = "<center><p style='background-color:#e74132; color:white; font-wieght:600;'>such a lonely session page, save some tabs</p></center>"
     }
 }
+function removeTabLcoally(event){
+    let itemClicked=event.target.parentElement.getAttribute("id");
+    let windowClicked=event.target.parentElement.parentElement.parentElement.getAttribute("id")
+    console.log("Item clicked: "+itemClicked+"\n Window Clicked: "+windowClicked);
+
+    chrome.storage.local.get(windowClicked,function(resultObj){
+        resultTabs=resultObj[windowClicked];
+        console.log(resultTabs);
+        resultTabs.splice(itemClicked,1);
+        var freshWindow=resultTabs;
+        
+    console.log("\nTo delete: "+resultTabs[itemClicked]);
+   
+    chrome.storage.local.remove(windowClicked);
+        let saveObj={};
+        saveObj[windowClicked]=freshWindow;
+            chrome.storage.local.set(saveObj);
+    });
+    let windowDOM=document.getElementById(windowClicked);
+    let tabDOM=event.target.parentElement;
+    windowDOM.lastChild.removeChild(tabDOM);
+}
+
 // remove locally saved urls
 function removeWindow(key) {
+    console.log(key);
     chrome.storage.local.remove(key, function (result) {
         $("#" + key).remove();
     });
