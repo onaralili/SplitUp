@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var windowsList = [];
   btSplitUp.addEventListener('click', () => {
 
-   var lists = getSelectedTabs();
+    var lists = getSelectedTabs();
     //creates a window
     if (lists[0] != null) {
       chrome.windows.create({
@@ -31,14 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
       saveLocallyImg.style.width = "16px";
       saveLocallyImg.style.height = "16px";
       saveLocallyImg.className = "savelocally";
-      saveLocally.title="Save to Bookmarks";
+      saveLocally.title = "Save to Bookmarks";
       closeWindow.setAttribute('src', "img/trash.png");
       closeWindow.style.width = "16px";
       closeWindow.style.height = "16px";
       closeWindow.className = "closeWindow";
       closeWindow.style.marginBottom = "0";
       closeWindow.style.marginRight = "0.3em";
-      closeWindow.title="Close Window";
+      closeWindow.title = "Close Window";
       windowsList.push(listId);
 
       let list = document.createElement("div");
@@ -69,7 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
         li.setAttribute("draggable", "true");
         li.setAttribute("class", "listItem");
         li.id = tab.index;
-        icon.setAttribute("src", tab.favIconUrl);
+        if (tab.favIconUrl !== undefined) {
+          icon.setAttribute("src", tab.favIconUrl);
+        } else {
+          icon.setAttribute("src", "img/default_favicon.png");
+        }
         icon.setAttribute("width", "16");
         icon.setAttribute("height", "16");
         icon.setAttribute("class", "urlIcon")
@@ -148,17 +152,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         $(".closeWindow").off().on('click', function (e) {
           var selectedTabs = getSelectedTabs();
-          if (selectedTabs[1].length > 0){
-            selectedTabs[1].forEach(function(tab){
+          if (selectedTabs[1].length > 0) {
+            selectedTabs[1].forEach(function (tab) {
               closeTab(tab);
             })
-          } else  {
+          } else {
             const selectedWindow = e.target.parentElement.parentElement;
             const windowId = Number(selectedWindow.id);
             if (confirm("Close this window?")) {
               chrome.windows.remove(windowId);
               document.getElementById(windowId).remove();
-            } 
+            }
           }
         });
       });

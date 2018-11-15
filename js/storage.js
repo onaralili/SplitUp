@@ -124,7 +124,7 @@ function generateSavedListWindow(allKeys) {
                         if (tab.favIconUrl !== undefined) {
                             icon.setAttribute("src", tab.favIconUrl);
                         } else {
-                            icon.setAttribute("src", "");
+                            icon.setAttribute("src", "img/default_favicon.png");
                         }
                         icon.setAttribute("width", "16");
                         icon.setAttribute("height", "16");
