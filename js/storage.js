@@ -72,11 +72,11 @@ function generateSavedListWindow(allKeys) {
                 selectAll.style.marginRight = "0.3em";
                 selectAll.addEventListener('click', function (e) {
 
-                    let savedListDOM = e.target.parentNode.parentNode.lastChild;
-                    let lp = savedListDOM.childNodes;
-                    for (var i = 0; i < lp.length; i++) {
-                        lp[i].firstChild.click();
-                    }
+                let savedListDOM = e.target.parentNode.parentNode.lastChild;
+                let lp = savedListDOM.childNodes;
+                for (var i = 0; i < lp.length; i++) {
+                    lp[i].firstChild.click();
+                }
 
                 });
                 trashLocallyImg.addEventListener('click', function (e) {
@@ -139,7 +139,6 @@ function generateSavedListWindow(allKeys) {
                         checkbox.setAttribute("name", "urlcb");
                         checkbox.setAttribute("class", "cb");
                         checkbox.value = tab.url;
-                        // append tags
                         li.appendChild(checkbox);
                         li.appendChild(icon);
                         li.appendChild(urlText);
@@ -147,10 +146,14 @@ function generateSavedListWindow(allKeys) {
                         ul.appendChild(li);
                     });
                 }
+                  // check if in dark mode
+                var navbarInDarkM = document.getElementsByClassName('navbar')[0].classList.contains('dark');
+                switchToDarkMode(navbarInDarkM);
             })
+            
         })
+        
     } else {
-        console.log("test")
         savedList.innerHTML = "<center><p style='background-color:#e74132; color:white; font-wieght:600;'>such a lonely session page, save some tabs</p></center>"
     }
 }

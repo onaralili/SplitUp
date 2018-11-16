@@ -141,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         document.getElementById("exportTabs").addEventListener('click', exportTabsFn);
+        document.getElementById("darkMode").addEventListener('click', switchToDarkMode);
         document.getElementById("separate").addEventListener('click', separateExtFn);
         document.getElementById('btsavedlist').addEventListener('click', openSavedList)
         document.getElementById('btback').addEventListener('click', goBackTabList)
