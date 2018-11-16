@@ -120,7 +120,6 @@ function switchToDarkMode(lightOn) {
   let allLists = document.querySelectorAll('#list');
   let toolbarOfList = document.querySelectorAll('.closeWindow');
   let searchInput = document.getElementsByClassName('search')[0];
-  let crabButton = document.getElementsByClassName('splitup-button')[0];
 
   // Saved tab list elements
   let savedList  = document.getElementById('cbListSaved');
@@ -154,7 +153,6 @@ function switchToDarkMode(lightOn) {
     })
 
     document.getElementById('darkMode').src = "img/light.png"
-    crabButton.style.fill = "#484141"
   } 
   else {
     navBars.forEach(function (e) {
@@ -181,8 +179,6 @@ function switchToDarkMode(lightOn) {
     })
 
     document.getElementById('darkMode').src = "img/dark.png";
-    crabButton.style.fill = "#fff"
-
   }
  
 }
