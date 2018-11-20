@@ -4,7 +4,7 @@
 <p align="center" >
     SplitUp! - Tab Manager
 <p>
-SplitUp is tab manager for Chrome (Firefox soon), it comes with bunch of features:
+SplitUp is tab manager for Chrome (Firefox soon), it comes with bunch of features:  
 - Save sessions
 - Split tabs into a new window
 - Dark mode
