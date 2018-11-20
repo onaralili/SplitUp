@@ -4,20 +4,31 @@
 <p align="center" >
     SplitUp! - Tab Manager
 <p>
-<center>Have FUN organizing & saving your tabs & windows with the ultimate Tab Manager.
-  Constantly updated and open to any contribution or feedback! </center>
-
-[Start a new issue](https://github.com/onaralili/SplitUp/issues/new)
-
-[Leave a review on the web store](https://chrome.google.com/webstore/detail/splitup-tab-manager/bhoodecbejheonelhikcfahgpgahffmf)
-
-
-<a href="https://www.paypal.me/oalili/5"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"/></a>
+SplitUp is tab manager for Chrome (Firefox soon), it comes with bunch of features:
+- Save sessions
+- Split tabs into a new window
+- Dark mode
+- Drag and Drop tabs across windows
+- Fuzzy Search
+- Multiscreen support
+- Export tabs
+- Close windows/tabs
 
 ### Install
 <a href="https://chrome.google.com/webstore/detail/splitup/bhoodecbejheonelhikcfahgpgahffmf"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png" width="48" /></a>
 
+### Contribution
+[Start a new issue](https://github.com/onaralili/SplitUp/issues/new)
+
+[Leave a review on the web store](https://chrome.google.com/webstore/detail/splitup-tab-manager/bhoodecbejheonelhikcfahgpgahffmf)
+
+<a href="https://www.paypal.me/oalili/5"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"/></a>
+
+### Screenshots
 <p align="center">
   <img src="https://lh3.googleusercontent.com/G72k9NthXtZ0hjTkuOkKT93gZHv3saKpsewfG8mbixNSM3S9t1KMf1012R3RyuHYZswAjiTv2Q=w640-h400-e365" />
+</p>
+<p align="center">
+  <img src="https://lh3.googleusercontent.com/LUDkE03MMjuOMCNjBV8YSEGjAyqG_cufnm8_1S1YbF2Xgl4FBmcnvj6y_li2ihF4xawJywk9=w640-h400-e365" />
 </p>
 
