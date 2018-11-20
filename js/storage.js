@@ -49,6 +49,7 @@ function generateSavedListWindow(allKeys) {
     if (allKeys.length > 0) {
         savedList.innerHTML = "";
         allKeys.map(function (key) {
+            if (key !== 'darkModeIs') {
             chrome.storage.local.get(key, function (tabsObj) {
 
                 let color = getRandomColor();
@@ -146,11 +147,13 @@ function generateSavedListWindow(allKeys) {
                         ul.appendChild(li);
                     });
                 }
-                  // check if in dark mode
-                var navbarInDarkM = document.getElementsByClassName('navbar')[0].classList.contains('dark');
-                switchToDarkMode(navbarInDarkM);
+                  // check if dark mode is on
+                chrome.storage.local.get(['darkModeIs'], function (result) {
+                    switchToDarkMode(result.darkModeIs);
+                })
+
             })
-            
+        }
         })
         
     } else {

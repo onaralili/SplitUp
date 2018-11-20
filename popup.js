@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
       cbList.appendChild(list);
 
       let ul = document.createElement("ul");
-      // ul.classList.add("list");  
       ul.setAttribute('id', "list");
       list.setAttribute('style', 'border-left: 8px solid ' + color + '!important;')
       list.appendChild(ul);
@@ -139,7 +138,10 @@ document.addEventListener('DOMContentLoaded', () => {
         $(".search").keyup(function () {
           search();
         });
-
+        // check if dark mode is on
+        chrome.storage.local.get(['darkModeIs'], function (result) {
+          switchToDarkMode(result.darkModeIs);
+        })
         document.getElementById("exportTabs").addEventListener('click', exportTabsFn);
         document.getElementById("darkMode").addEventListener('click', switchToDarkMode);
         document.getElementById("separate").addEventListener('click', separateExtFn);

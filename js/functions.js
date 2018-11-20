@@ -120,67 +120,75 @@ function switchToDarkMode(lightOn) {
   let allLists = document.querySelectorAll('#list');
   let toolbarOfList = document.querySelectorAll('.closeWindow');
   let searchInput = document.getElementsByClassName('search')[0];
-
   // Saved tab list elements
   let savedList  = document.getElementById('cbListSaved');
   let savedToolbarOfList = document.querySelectorAll('.selectAll');
   let savedMainList = document.querySelectorAll('.listMain');
 
-  if (!navBars[0].classList.contains('dark')) {
+  chrome.storage.local.get(['darkModeIs'], function (result) {
     console.log(lightOn)
-    // the main tab list
-    navBars.forEach(function (e) {
-      e.classList.add('dark');
-    })
-    allLists.forEach(function (e) {
-      e.classList.add('darkish');
-    })
-    toolbarOfList.forEach(function (e) {
-      e.parentElement.classList.add('darkish');
-    })
-    container.color = "white";
-    mainList.classList.add('dark');
-    searchInput.classList.add('darkish');
-    searchInput.style.color = "white";
+    let darkModeIs = (typeof lightOn === 'boolean') ? !lightOn : result.darkModeIs;
+    if (darkModeIs) {
+      chrome.storage.local.set({ "darkModeIs": false }, function () {
+        console.log('value set to ' + false)
+      });
 
-    // Saved tab list
-    savedList.classList.add('dark');
-    savedToolbarOfList.forEach(function (e) {
-      e.parentElement.classList.add('darkish');
-    })
-    savedMainList.forEach(function (e) {
-      e.classList.add('darkish');
-    })
+      navBars.forEach(function (e) {
+        e.classList.remove('dark')
+      })
+      allLists.forEach(function (e) {
+        e.classList.remove('darkish');
+      })
+      toolbarOfList.forEach(function (e) {
+        e.parentElement.classList.remove('darkish');
+      })
+      container.color = "black";
+      mainList.classList.remove('dark');
+      searchInput.classList.remove('darkish');
+      searchInput.style.color = "";
 
-    document.getElementById('darkMode').src = "img/light.png"
-  } 
-  else {
-    navBars.forEach(function (e) {
-      e.classList.remove('dark')
-    })
-    allLists.forEach(function (e) {
-      e.classList.remove('darkish');
-    })
-    toolbarOfList.forEach(function (e) {
-      e.parentElement.classList.remove('darkish');
-    })
-    container.color = "black";
-    mainList.classList.remove('dark');
-    searchInput.classList.remove('darkish');
-    searchInput.style.color = "";
+      // Saved tab list
+      savedList.classList.remove('dark');
+      savedToolbarOfList.forEach(function (e) {
+        e.parentElement.classList.remove('darkish');
+      })
+      savedMainList.forEach(function (e) {
+        e.classList.remove('darkish');
+      })
 
-    // Saved tab list
-    savedList.classList.remove('dark');
-    savedToolbarOfList.forEach(function (e) {
-      e.parentElement.classList.remove('darkish');
-    })
-    savedMainList.forEach(function (e) {
-      e.classList.remove('darkish');
-    })
+      document.getElementById('darkMode').src = "img/dark.png";
+    } else {
+      // save the state 
+      chrome.storage.local.set({ "darkModeIs": true }, function () {
+        console.log('value set to ' + true)
+      });
+      // the main tab list
+      navBars.forEach(function (e) {
+        e.classList.add('dark');
+      })
+      allLists.forEach(function (e) {
+        e.classList.add('darkish');
+      })
+      toolbarOfList.forEach(function (e) {
+        e.parentElement.classList.add('darkish');
+      })
+      container.color = "white";
+      mainList.classList.add('dark');
+      searchInput.classList.add('darkish');
+      searchInput.style.color = "white";
 
-    document.getElementById('darkMode').src = "img/dark.png";
-  }
- 
+      // Saved tab list
+      savedList.classList.add('dark');
+      savedToolbarOfList.forEach(function (e) {
+        e.parentElement.classList.add('darkish');
+      })
+      savedMainList.forEach(function (e) {
+        e.classList.add('darkish');
+      })
+
+      document.getElementById('darkMode').src = "img/light.png"
+    }
+  });
 }
 
 // separate extension into different window
