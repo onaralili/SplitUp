@@ -1,4 +1,5 @@
 "use strict"
+chrome.runtime.setUninstallURL("https://goo.gl/forms/u4OmQXmfeDz4Urjt2");
 document.addEventListener('DOMContentLoaded', () => {
   var btSplitUp = document.querySelector(".splitUpBt");
   var windowsList = [];
