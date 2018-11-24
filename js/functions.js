@@ -124,11 +124,14 @@ function switchToDarkMode(lightOn) {
   let savedList  = document.getElementById('cbListSaved');
   let savedToolbarOfList = document.querySelectorAll('.selectAll');
   let savedMainList = document.querySelectorAll('.listMain');
+  let html = document.getElementsByTagName("html")[0];
+  let body = document.getElementsByTagName("body")[0];
 
   chrome.storage.local.get(['darkModeIs'], function (result) {
     console.log(lightOn)
     let darkModeIs = (typeof lightOn === 'boolean') ? !lightOn : result.darkModeIs;
     if (darkModeIs) {
+      // Dark mode is off
       chrome.storage.local.set({ "darkModeIs": false }, function () {
         console.log('value set to ' + false)
       });
@@ -146,6 +149,8 @@ function switchToDarkMode(lightOn) {
       mainList.classList.remove('dark');
       searchInput.classList.remove('darkish');
       searchInput.style.color = "";
+      html.classList.remove('dark');
+      body.classList.remove('dark');
 
       // Saved tab list
       savedList.classList.remove('dark');
@@ -176,6 +181,8 @@ function switchToDarkMode(lightOn) {
       mainList.classList.add('dark');
       searchInput.classList.add('darkish');
       searchInput.style.color = "white";
+      html.classList.add('dark');
+      body.classList.add('dark');
 
       // Saved tab list
       savedList.classList.add('dark');

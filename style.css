@@ -148,8 +148,8 @@ background-repeat: no-repeat;
 background-size: 100%;
 }
 
-/* pinchers animation pinches */
-@keyframes spin {
+/* pinchers animation */
+/* @keyframes spin {
 from {transform:rotate(0deg);}
 to {transform:rotate(-2deg);}
 }
@@ -157,17 +157,19 @@ to {transform:rotate(-2deg);}
 from {transform:rotate(0deg);}
 to {transform:rotate(4deg);}
 }
-.splitUpBt{
-  cursor:pointer
-}
-.splitUpBt:hover .pinch1{
+
+.splitUpBt:hover .pinch1 {
 animation: spin 1s infinite cubic-bezier(0.3, 0.76, 0.53, 0.92);
 transform-origin: 90% 50%;
 }
 
-.splitUpBt:hover .pinch2{
+.splitUpBt:hover .pinch2 {
 animation: spinPinch2 1s infinite cubic-bezier(0.3, 0.76, 0.53, 0.92);
 transform-origin: 90% 50%;
+} */
+
+.splitUpBt {
+  cursor:pointer
 }
 
 [draggable] {
