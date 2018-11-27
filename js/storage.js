@@ -46,7 +46,8 @@ function guid() {
 function generateSavedListWindow(allKeys) {
     let savedList = document.getElementById('cbListSaved');
     savedList.style.display = '';
-    if (allKeys.length > 0) {
+    console.log(allKeys.length)
+    if (allKeys.length > 1) {
         savedList.innerHTML = "";
         allKeys.map(function (key) {
             if (key !== 'darkModeIs') {
@@ -157,6 +158,7 @@ function generateSavedListWindow(allKeys) {
         })
         
     } else {
+        console.log('reached here')
         savedList.innerHTML = "<center><p style='background-color:#e74132; color:white; font-wieght:600;'>such a lonely session page, save some tabs</p></center>"
     }
 }
