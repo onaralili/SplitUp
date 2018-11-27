@@ -37,7 +37,6 @@ function handleDrop(e) {
     if (e.stopPropagation) {
         e.stopPropagation(); 
     }
-
     // Don't do anything if dropping the same column we're dragging.
     if (dragSrcEl != this) {
         movingToWindowId = this.parentNode.parentNode.id;
@@ -55,16 +54,12 @@ function handleDrop(e) {
 
     }
     this.classList.remove('over');
-
-
-
     return false;
 }
 
 function handleDragEnd(e) {
     // this/e.target is the source node.
     this.classList.remove('over');
-
     let elements = $("#"+movingToWindowId).find('li');
     elements.map(function(element){
         elements[element].id=element;

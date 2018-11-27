@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   var btSplitUp = document.querySelector(".splitUpBt");
   var windowsList = [];
   btSplitUp.addEventListener('click', () => {
-
     var lists = getSelectedTabs();
     //creates a window
     if (lists[0] != null) {
@@ -18,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
       closeTab(lists[1][index])
     }
   })
-
   chrome.windows.getAll({ populate: true }, function (windows) {
     var cbList = document.getElementById("cbList");
 
@@ -102,43 +100,22 @@ document.addEventListener('DOMContentLoaded', () => {
           li.appendChild(audioIcon);
 
         }
-        // if(tab.pinned){
-        //   let pinnedIcon = document.createElement("img");
-        //   pinnedIcon.setAttribute("src", "\\img\\pin.png");
-        //   pinnedIcon.setAttribute('class','audio')
-        //   pinnedIcon.setAttribute("width", "16");
-        //   pinnedIcon.setAttribute("height", "16");
-        //   li.appendChild(pinnedIcon);
-
-        //   pinnedIcon.addEventListener('click',function(e){
-        //     pinTab(e.path[1].lastChild.id);
-        //     console.log(e.path[1].lastChild.id)
-        // });
-        // }
         // append tags
         li.appendChild(checkbox);
         li.appendChild(icon);
         li.appendChild(urlText);
         li.appendChild(close);
         ul.appendChild(li);
-
-        // close.addEventListener('click', function (e) {
-        //   closeTab(e.path[0].id);
-        // });
-
-        // urlText.addEventListener('click', function (e) {
-        //   selectTab(e.path[1].childNodes[3].id);
-        // });
-
         // binds listeners to the elements
         BindListenersToElements();
 
         var cols = document.querySelectorAll('#list .listItem');
         [].forEach.call(cols, addDnDHandlers);
-
-        $(".search").keyup(function () {
-          search();
-        });
+        var searchInput = document.getElementsByClassName('search')[0];
+        searchInput.addEventListener('keyup',function () {
+            search();
+          });
+        searchInput.focus();
         // check if dark mode is on
         chrome.storage.local.get(['darkModeIs'], function (result) {
           switchToDarkMode(result.darkModeIs);

@@ -128,13 +128,10 @@ function switchToDarkMode(lightOn) {
   let body = document.getElementsByTagName("body")[0];
 
   chrome.storage.local.get(['darkModeIs'], function (result) {
-    console.log(lightOn)
     let darkModeIs = (typeof lightOn === 'boolean') ? !lightOn : result.darkModeIs;
     if (darkModeIs) {
       // Dark mode is off
-      chrome.storage.local.set({ "darkModeIs": false }, function () {
-        console.log('value set to ' + false)
-      });
+      chrome.storage.local.set({ "darkModeIs": false });
 
       navBars.forEach(function (e) {
         e.classList.remove('dark')
@@ -164,9 +161,7 @@ function switchToDarkMode(lightOn) {
       document.getElementById('darkMode').src = "img/dark.png";
     } else {
       // save the state 
-      chrome.storage.local.set({ "darkModeIs": true }, function () {
-        console.log('value set to ' + true)
-      });
+      chrome.storage.local.set({ "darkModeIs": true });
       // the main tab list
       navBars.forEach(function (e) {
         e.classList.add('dark');
