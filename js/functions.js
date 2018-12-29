@@ -209,26 +209,20 @@ function separateExtFn() {
 }
 
 function BindListenersToElements() {
-  // elements
   let closes = Array.from(document.getElementsByClassName('cclose'));
   let urlTexts = Array.from(document.getElementsByClassName('item'))
   let audio = Array.from(document.getElementsByClassName('audio'))
   // listeners
   closes.map(function (close) {
     close.addEventListener('click', function (e) {
-      // const sUsrAg = navigator.userAgent;
-      // if (sUsrAg.indexOf("Firefox") > -1) {
         closeTab(e.target.id);
-      // } else {
-      //   closeTab(e.path[0].id);
-      // }
     });
   })
 
   urlTexts.map(function (urlText) {
     urlText.addEventListener('click', function (e) {
-      
-      selectTab(e.path[1].getElementsByClassName('cclose')[0].id);
+      console.log(e)
+      selectTab(e.target.nextSibling.id);
     });
   })
 
