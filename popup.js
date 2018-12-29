@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (tab.audible) {
           let audioIcon = document.createElement("img");
-          audioIcon.setAttribute("src", "\\img\\SoundIcon.png");
+          audioIcon.setAttribute("src", "img/SoundIcon.png");
           audioIcon.setAttribute('class', 'audio')
           audioIcon.setAttribute("width", "16");
           audioIcon.setAttribute("height", "16");

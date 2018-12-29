@@ -14,8 +14,7 @@ function muteTab(e) {
   let tabId = Number(e);
   chrome.tabs.get(tabId, function (tab) {
     chrome.tabs.update(tabId, { muted: !tab.mutedInfo.muted });
-
-    $("#" + tabId).siblings(".audio").attr("src", tab.mutedInfo.muted ? "\\img\\SoundIcon.png" : "\\img\\MuteIcon.png")
+    $("#" + tabId).siblings(".audio").attr("src", tab.mutedInfo.muted ? "img/SoundIcon.png" : "img/MuteIcon.png")
   })
 
 }
@@ -221,14 +220,14 @@ function BindListenersToElements() {
 
   urlTexts.map(function (urlText) {
     urlText.addEventListener('click', function (e) {
-      console.log(e)
       selectTab(e.target.nextSibling.id);
     });
   })
 
   audio.map(function (audioEl) {
     audioEl.addEventListener('click', function (e) {
-      muteTab(e.path[1].lastChild.id);
+      console.log('audio',e)
+      muteTab(e.target.parentNode.lastChild.id);
     });
   })
 }
