@@ -106,8 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         li.appendChild(urlText);
         li.appendChild(close);
         ul.appendChild(li);
-        // binds listeners to the elements
-        BindListenersToElements();
+      
 
         var cols = document.querySelectorAll('#list .listItem');
         [].forEach.call(cols, addDnDHandlers);
@@ -147,6 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       });
+        // binds listeners to the elements
+        BindListenersToElements();
     });
   });
 });

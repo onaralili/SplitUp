@@ -35,7 +35,10 @@ function openNewTab(e){
 function closeTab(e) {
   let tabId = Number(e);
   chrome.tabs.remove(tabId);
-  $("#" + e).parent().remove();
+  let tabElement  = $("#" + e).parent();
+  if (tabElement.length === 1) {
+      $("#" + e).parent().remove();
+  }
 }
 
 
@@ -205,16 +208,20 @@ function separateExtFn() {
   });
 }
 
-function BindListenersToElements(element) {
+function BindListenersToElements() {
   // elements
   let closes = Array.from(document.getElementsByClassName('cclose'));
   let urlTexts = Array.from(document.getElementsByClassName('item'))
   let audio = Array.from(document.getElementsByClassName('audio'))
-
   // listeners
   closes.map(function (close) {
     close.addEventListener('click', function (e) {
-      closeTab(e.path[0].id);
+      // const sUsrAg = navigator.userAgent;
+      // if (sUsrAg.indexOf("Firefox") > -1) {
+        closeTab(e.target.id);
+      // } else {
+      //   closeTab(e.path[0].id);
+      // }
     });
   })
 

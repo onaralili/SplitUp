@@ -7,8 +7,6 @@ function saveUrlsLocally(window, windowId) {
             setObj[uuid] = tab.tabs;
             if (selectedTabs[1].length > 0) {
                 setObj[uuid].forEach(function (tab) {
-                    console.log(tab.id)
-                    console.log(selectedTabs[1])
                     if (!selectedTabs[1].includes(tab.id.toString())) {
                         setObj[uuid] = remove(setObj[uuid], tab);
                     }
@@ -46,7 +44,6 @@ function guid() {
 function generateSavedListWindow(allKeys) {
     let savedList = document.getElementById('cbListSaved');
     savedList.style.display = '';
-    console.log(allKeys.length)
     if (allKeys.length > 1) {
         savedList.innerHTML = "";
         allKeys.map(function (key) {
@@ -158,7 +155,6 @@ function generateSavedListWindow(allKeys) {
         })
         
     } else {
-        console.log('reached here')
         savedList.innerHTML = "<center><p style='background-color:#e74132; color:white; font-wieght:600;'>such a lonely session page, save some tabs</p></center>"
     }
 }
