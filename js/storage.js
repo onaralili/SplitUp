@@ -56,7 +56,7 @@ function generateSavedListWindow(allKeys) {
                 let trashLocally = document.createElement('div');
                 let trashLocallyImg = document.createElement('img');
                 let selectAll = document.createElement('img');
-                trashLocallyImg.setAttribute('src', "img\\trash.png");
+                trashLocallyImg.setAttribute('src', "img/trash.png");
                 trashLocallyImg.style.width = "16px";
                 trashLocallyImg.style.height = "16px";
                 trashLocallyImg.className = "trashlocally";
