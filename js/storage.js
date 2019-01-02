@@ -45,7 +45,8 @@ function generateSavedListWindow(allKeys) {
     let savedList = document.getElementById('cbListSaved');
     savedList.style.display = '';
     if (allKeys.length > 1) {
-        savedList.innerHTML = "";
+        // empty DOM (this is equal to innerHTML = '', however, faster)
+        while (savedList.firstChild) savedList.removeChild(savedList.firstChild);
         allKeys.map(function (key) {
             if (key !== 'darkModeIs') {
             chrome.storage.local.get(key, function (tabsObj) {
@@ -155,7 +156,7 @@ function generateSavedListWindow(allKeys) {
         })
         
     } else {
-        savedList.innerHTML = "<center><p style='background-color:#e74132; color:white; font-wieght:600;'>such a lonely session page, save some tabs</p></center>"
+        savedList.innerHTML = Sanitizer.escapeHTML`<center><p style="background-color:#e74132; color:white; font-wieght:600;">such a lonely session page, save some tabs</p></center>`;
     }
 }
 function removeTabLocally(event) {
