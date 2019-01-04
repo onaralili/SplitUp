@@ -14,9 +14,11 @@ SplitUp is tab manager for Chrome (Firefox soon), it comes with bunch of feature
 - Multiscreen support
 - Export tabs
 - Close windows/tabs
+- Mute/Unmute tabs
 
 ### Install
 <a href="https://chrome.google.com/webstore/detail/splitup/bhoodecbejheonelhikcfahgpgahffmf"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png" width="48" /></a>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/splitup-tab-manager/"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_128x128.png" width="48" /></a>
 
 ### Contribution
 [Start a new issue](https://github.com/onaralili/SplitUp/issues/new)
