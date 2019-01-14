@@ -6,14 +6,14 @@
 <p>
 
 SplitUp is tab manager for Chrome (Firefox soon), it comes with bunch of features:  
-✅ Save sessions
-✅ Split tabs into a new window
-✅ Dark mode
-✅ Drag and Drop tabs across windows
-✅ Fuzzy Search
-✅ Multiscreen support
-✅ Export tabs
-✅ Close windows/tabs
+✅ Save sessions \
+✅ Split tabs into a new window \
+✅ Dark mode \
+✅ Drag and Drop tabs across windows \
+✅ Fuzzy Search \
+✅ Multiscreen support \
+✅ Export tabs \
+✅ Close windows/tabs \
 ✅ Mute/Unmute tabs
 
 ### Install
