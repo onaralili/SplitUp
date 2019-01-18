@@ -49,112 +49,123 @@ function generateSavedListWindow(allKeys) {
         while (savedList.firstChild) savedList.removeChild(savedList.firstChild);
         allKeys.map(function (key) {
             if (key !== 'darkModeIs') {
-            chrome.storage.local.get(key, function (tabsObj) {
+                chrome.storage.local.get(key, function (tabsObj) {
 
-                let color = getRandomColor();
-                let listId = "list_" + key;
+                    let color = getRandomColor();
+                    let listId = "list_" + key;
 
-                let trashLocally = document.createElement('div');
-                let trashLocallyImg = document.createElement('img');
-                let selectAll = document.createElement('img');
-                trashLocallyImg.setAttribute('src', "img/trash.png");
-                trashLocallyImg.style.width = "16px";
-                trashLocallyImg.style.height = "16px";
-                trashLocallyImg.className = "trashlocally";
-                trashLocallyImg.title = "Remove from Bookmarks"
+                    let trashLocally = document.createElement('div');
+                    let trashLocallyImg = document.createElement('img');
+                    let selectAll = document.createElement('img');
+                    trashLocallyImg.setAttribute('src', "img/trash.png");
+                    trashLocallyImg.style.width = "16px";
+                    trashLocallyImg.style.height = "16px";
+                    trashLocallyImg.className = "trashlocally";
+                    trashLocallyImg.title = "Remove from Bookmarks"
 
-                selectAll.setAttribute('src', "img/select.png");
-                selectAll.style.width = "16px";
-                selectAll.style.height = "16px";
-                selectAll.title = "Select all";
-                selectAll.className = "selectAll";
-                selectAll.style.marginBottom = "-1px";
-                selectAll.style.marginRight = "0.3em";
-                selectAll.addEventListener('click', function (e) {
+                    selectAll.setAttribute('src', "img/select.png");
+                    selectAll.style.width = "16px";
+                    selectAll.style.height = "16px";
+                    selectAll.title = "Select all";
+                    selectAll.className = "selectAll";
+                    selectAll.style.marginBottom = "-1px";
+                    selectAll.style.marginRight = "0.3em";
+                    selectAll.addEventListener('click', function (e) {
 
-                let savedListDOM = e.target.parentNode.parentNode.lastChild;
-                let lp = savedListDOM.childNodes;
-                for (var i = 0; i < lp.length; i++) {
-                    lp[i].firstChild.click();
-                }
-
-                });
-                trashLocallyImg.addEventListener('click', function (e) {
-                    var result = confirm("This will remove entire window, proceed?");
-                    if (result) {
-                        removeWindow(e.target.parentElement.parentElement.id);
-                    }
-                });
-                let list = document.createElement("div");
-                list.setAttribute('id', listId);
-                list.classList.add("listMain")
-                list.id = key;
-                trashLocally.style.backgroundColor = "white";
-                trashLocally.style.position = "relative";
-                trashLocally.style.textAlign = "right";
-                trashLocally.appendChild(selectAll);
-                trashLocally.appendChild(trashLocallyImg);
-                list.appendChild(trashLocally);
-                cbListSaved.appendChild(list);
-
-                let ul = document.createElement("ul");
-                ul.setAttribute('id', "list");
-                list.setAttribute('style', 'border-left: 8px solid ' + color + '!important;')
-                list.appendChild(ul);
-
-
-                for (const key of Object.keys(tabsObj)) {
-                    tabsObj[key].forEach(tab => {
-                        let li = document.createElement("li");
-                        let urlText = document.createElement("span");
-                        let icon = document.createElement("img");
-                        let close = document.createElement("input");
-                        let checkbox = document.createElement("input");
-                        li.setAttribute("draggable", "true");
-                        li.setAttribute("class", "listItem");
-                        close.setAttribute('class', 'trashLocalTab');
-                        close.value = 'x';
-                        close.type = 'button';
-                        close.style.fontWeight = 'bold';
-                        close.id = tab.id;
-                        li.id = tab.index;
-                        close.addEventListener('click', function (event) {
-                            removeTabLocally(event);
-                        })
-                        if (tab.favIconUrl !== undefined) {
-                            icon.setAttribute("src", tab.favIconUrl);
-                        } else {
-                            icon.setAttribute("src", "img/default_favicon.png");
+                        let savedListDOM = e.target.parentNode.parentNode.lastChild;
+                        let lp = savedListDOM.childNodes;
+                        for (var i = 0; i < lp.length; i++) {
+                            lp[i].firstChild.click();
                         }
-                        icon.setAttribute("width", "16");
-                        icon.setAttribute("height", "16");
-                        icon.setAttribute("class", "urlIcon")
-                        urlText.setAttribute("class", "saveditem");
-                        urlText.textContent = tab.title.substring(0, 33);
-                        urlText.title = tab.title;
-                        urlText.addEventListener('click', function (e) {
-                            openNewTab(e.target.previousSibling.previousSibling.value);
-                        });
-                        checkbox.setAttribute("type", "checkbox");
-                        checkbox.setAttribute("name", "urlcb");
-                        checkbox.setAttribute("class", "cb");
-                        checkbox.value = tab.url;
-                        li.appendChild(checkbox);
-                        li.appendChild(icon);
-                        li.appendChild(urlText);
-                        li.appendChild(close);
-                        ul.appendChild(li);
-                    });
-                }
-                  // check if dark mode is on
-                chrome.storage.local.get(['darkModeIs'], function (result) {
-                    switchToDarkMode(result.darkModeIs);
-                })
 
-            })
-        }
+                    });
+                    trashLocallyImg.addEventListener('click', function (e) {
+                        var lists = getSelectedTabs();
+                        if (lists[0].length > 0) {
+                            // some tabs selected so remove these ones 
+                            var windowId = e.target.parentElement.parentElement.id;
+                            removeSelectedTabLocally(lists[1], windowId);
+                            //   lists[1].forEach(function(tabId){
+                            //       removeSelectedTabLocally(tabId, windowId);
+                            //   })
+                        } else {
+                            var result = confirm("This will remove entire window, proceed?");
+                            if (result) {
+                                removeWindow(e.target.parentElement.parentElement.id);
+                            }
+                        }
+
+                    });
+                    let list = document.createElement("div");
+                    list.setAttribute('id', listId);
+                    list.classList.add("listMain")
+                    list.id = key;
+                    trashLocally.style.backgroundColor = "white";
+                    trashLocally.style.position = "relative";
+                    trashLocally.style.textAlign = "right";
+                    trashLocally.appendChild(selectAll);
+                    trashLocally.appendChild(trashLocallyImg);
+                    list.appendChild(trashLocally);
+                    cbListSaved.appendChild(list);
+
+                    let ul = document.createElement("ul");
+                    ul.setAttribute('id', "list");
+                    list.setAttribute('style', 'border-left: 8px solid ' + color + '!important;')
+                    list.appendChild(ul);
+
+
+                    for (const key of Object.keys(tabsObj)) {
+                        tabsObj[key].forEach(tab => {
+                            let li = document.createElement("li");
+                            let urlText = document.createElement("span");
+                            let icon = document.createElement("img");
+                            let close = document.createElement("input");
+                            let checkbox = document.createElement("input");
+                            li.setAttribute("draggable", "true");
+                            li.setAttribute("class", "listItem");
+                            close.setAttribute('class', 'trashLocalTab');
+                            close.value = 'x';
+                            close.type = 'button';
+                            close.style.fontWeight = 'bold';
+                            close.id = tab.id;
+                            li.id = tab.index;
+                            close.addEventListener('click', function (event) {
+                                removeTabLocally(event);
+                            })
+                            if (tab.favIconUrl !== undefined) {
+                                icon.setAttribute("src", tab.favIconUrl);
+                            } else {
+                                icon.setAttribute("src", "img/default_favicon.png");
+                            }
+                            icon.setAttribute("width", "16");
+                            icon.setAttribute("height", "16");
+                            icon.setAttribute("class", "urlIcon")
+                            urlText.setAttribute("class", "saveditem");
+                            urlText.textContent = tab.title.substring(0, 33);
+                            urlText.title = tab.title;
+                            urlText.addEventListener('click', function (e) {
+                                openNewTab(e.target.previousSibling.previousSibling.value);
+                            });
+                            checkbox.setAttribute("type", "checkbox");
+                            checkbox.setAttribute("name", "urlcb");
+                            checkbox.setAttribute("class", "cb");
+                            checkbox.value = tab.url;
+                            li.appendChild(checkbox);
+                            li.appendChild(icon);
+                            li.appendChild(urlText);
+                            li.appendChild(close);
+                            ul.appendChild(li);
+                        });
+                    }
+                    // check if dark mode is on
+                    chrome.storage.local.get(['darkModeIs'], function (result) {
+                        switchToDarkMode(result.darkModeIs);
+                    })
+
+                })
+            }
         })
-        
+
     } else {
         savedList.innerHTML = Sanitizer.escapeHTML`<center><p style="background-color:#e74132; color:white; font-wieght:600;">such a lonely session page, save some tabs</p></center>`;
     }
@@ -163,7 +174,7 @@ function removeTabLocally(event) {
     let itemClicked = event.target.parentElement.getAttribute("id");
     let windowClicked = event.target.parentElement.parentElement.parentElement.getAttribute("id")
     chrome.storage.local.get(windowClicked, function (resultObj) {
-        resultTabs = resultObj[windowClicked];
+        let resultTabs = resultObj[windowClicked];
         for (var i = 0; i < resultTabs.length; i++) {
             if (resultTabs[i].index == itemClicked) {
                 resultTabs.splice(i, 1);
@@ -172,7 +183,7 @@ function removeTabLocally(event) {
         }
         var freshWindow = resultTabs;
         chrome.storage.local.remove(windowClicked);
-        if (freshWindow.length == 0) {
+        if (freshWindow.length === 0) {
             document.getElementById(windowClicked).parentNode.removeChild(windowDOM);
         } else {
             let saveObj = {};
@@ -185,12 +196,39 @@ function removeTabLocally(event) {
     windowDOM.lastChild.removeChild(tabDOM);
 }
 
+function removeSelectedTabLocally(listOfTabIds, windowId) {
+    var saveObj = {};
+    chrome.storage.local.get(windowId, function (resultObj) {
+        let resultTabs = resultObj[windowId];
+        listOfTabIds.forEach(function (tabId) {
+            for (var i = 0; i < resultTabs.length; i++) {
+                if (resultTabs[i].id == tabId) {
+                    resultTabs.splice(i, 1);
+                }
+            }
+            if (resultTabs.length === 0) {
+                document.getElementById(windowId).remove();
+            } else {
+                document.getElementById(windowId).querySelectorAll('.trashLocalTab')
+                    .forEach(el => {
+                        if (el.id === tabId) el.parentElement.remove()
+                    })
+                saveObj[windowId] = resultTabs;
+            }
+        })
+    });
+    // console.log('saveObj', saveObj)
+    chrome.storage.local.remove(windowId, function(){
+        chrome.storage.local.set(saveObj,function(e){
+            console.log("saved obj", saveObj)
+        });
+    });
+    
+}
+
 // remove locally saved urls
 function removeWindow(key) {
     chrome.storage.local.remove(key, function () {
         $("#" + key).remove();
     });
-
-
-
 }

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   btSplitUp.addEventListener('click', () => {
     var lists = getSelectedTabs();
     //creates a window
-    if (lists[0] != null) {
+    if (lists[0] !== null) {
       chrome.windows.create({
         url: lists[0],
         type: "normal"
