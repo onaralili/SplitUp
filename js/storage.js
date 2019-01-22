@@ -76,12 +76,44 @@ function generateSavedListWindow(allKeys) {
                     let trashLocallyImg = document.createElement('img');
                     let sessionName = document.createElement('label');
                     let selectAll = document.createElement('img');
+
+                    sessionName.style.display = 'inline-block';
+                    sessionName.setAttribute('contenteditable', 'true');
+                    sessionName.setAttribute('spellcheck', 'false');
+                    sessionName.style.cursor = 'auto';
+                    sessionName.style.fontWeight = 'bold';
+                    sessionName.addEventListener('keydown', function(e){
+                        if (e.keyCode === 13) {
+                            e.preventDefault();
+                            let newNameOfSesion = e.srcElement.innerText;
+                            let windowId = e.srcElement.parentElement.parentElement.parentElement.id;
+                            chrome.storage.local.get(["sessionNamePairs"], function(sessions){
+                                let currentSession = sessions.sessionNamePairs;
+                                currentSession[windowId] = newNameOfSesion;
+                                chrome.storage.local.set({ "sessionNamePairs" : currentSession });
+                                e.srcElement.blur();
+                            })
+                          }
+                    })
                     trashLocallyImg.setAttribute('src', "img/trash.png");
                     trashLocallyImg.style.width = "16px";
                     trashLocallyImg.style.height = "16px";
                     trashLocallyImg.className = "trashlocally";
                     trashLocallyImg.title = "Remove from the session"
+                    trashLocallyImg.addEventListener('click', function (e) {
+                        var lists = getSelectedTabs();
+                        if (lists[0].length > 0) {
+                            // some tabs selected so remove these ones 
+                            var windowId = e.target.parentElement.parentElement.parentElement.id;
+                            removeSelectedTabLocally(lists[1], windowId);
+                        } else {
+                            var result = confirm("This will remove entire window, proceed?");
+                            if (result) {
+                                removeWindow(e.target.parentElement.parentElement.parentElement.id);
+                            }
+                        }
 
+                    });
                     selectAll.setAttribute('src', "img/select.png");
                     selectAll.style.width = "16px";
                     selectAll.style.height = "16px";
@@ -96,20 +128,7 @@ function generateSavedListWindow(allKeys) {
                             lp[i].firstChild.click();
                         }
                     });
-                    trashLocallyImg.addEventListener('click', function (e) {
-                        var lists = getSelectedTabs();
-                        if (lists[0].length > 0) {
-                            // some tabs selected so remove these ones 
-                            var windowId = e.target.parentElement.parentElement.id;
-                            removeSelectedTabLocally(lists[1], windowId);
-                        } else {
-                            var result = confirm("This will remove entire window, proceed?");
-                            if (result) {
-                                removeWindow(e.target.parentElement.parentElement.parentElement.id);
-                            }
-                        }
-
-                    });
+                    
                     chrome.storage.local.get(["sessionNamePairs"], function(sessions){
                         sessionName.innerText = sessions.sessionNamePairs[key];
                     });
