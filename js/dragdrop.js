@@ -1,4 +1,4 @@
-"use strict"
+'use strict';
 // drag and drop using HTML5 
 // https://www.html5rocks.com/en/tutorials/dnd/basics/
 

@@ -143,9 +143,13 @@ margin-left: -7em;
 }
 
 .navbar{
-background-image:url('img/YellowStripe.png');
-background-repeat: no-repeat;
-background-size: 100%;
+  background-image:url('img/YellowStripe.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.session-header {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
 }
 
 /* pinchers animation */

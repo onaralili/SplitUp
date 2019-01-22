@@ -1,4 +1,4 @@
-"use strict"
+'use strict';
 // generates a random color
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -211,6 +211,7 @@ function BindListenersToElements() {
   let closes = Array.from(document.getElementsByClassName('cclose'));
   let urlTexts = Array.from(document.getElementsByClassName('item'))
   let audio = Array.from(document.getElementsByClassName('audio'))
+  let saveSessionName = document.getElementById('saveSessionNameBt');
   // listeners
   closes.map(function (close) {
     close.addEventListener('click', function (e) {

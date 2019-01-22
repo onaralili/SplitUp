@@ -1,30 +1,45 @@
-function saveUrlsLocally(window, windowId) {
-    var selectedTabs = getSelectedTabs(true);
-    chrome.windows.get(Number(windowId), { populate: true }, function (tab) {
-        const uuid = guid();
-        let setObj = [];
-        try {
-            setObj[uuid] = tab.tabs;
-            if (selectedTabs[1].length > 0) {
-                setObj[uuid].forEach(function (tab) {
-                    if (!selectedTabs[1].includes(tab.id.toString())) {
-                        setObj[uuid] = remove(setObj[uuid], tab);
-                    }
-                })
+'use strict';
+function saveUrlsLocally(windowId) {
+    var nameOfSesion = prompt("Please name your session", "My session");
+    if (nameOfSesion !== null) {
+        let saveIcon = document.getElementById(windowId).getElementsByClassName('savelocally');
+        saveIcon[0].setAttribute('src', 'img/loading.gif');
+        var selectedTabs = getSelectedTabs(true);
+        chrome.windows.get(Number(windowId), { populate: true }, function (tab) {
+            const uuid = guid();
+            let setObj = [];
+            try {
+                setObj[uuid] = tab.tabs;
+                if (selectedTabs[1].length > 0) {
+                    setObj[uuid].forEach(function (tab) {
+                        if (!selectedTabs[1].includes(tab.id.toString())) {
+                            setObj[uuid] = remove(setObj[uuid], tab);
+                        }
+                    })
+                }
+            } catch (err) {
+                throw new Error(err);
+            } finally {
+                var arrayToObject = Object.assign({}, setObj);
+                chrome.storage.local.set(arrayToObject, function () {
+                    chrome.storage.local.get(["sessionNamePairs"], function (sessions) {
+                        if (Object.entries(sessions).length !== 0) 
+                        {
+                            let currentSession = sessions.sessionNamePairs;
+                            currentSession[uuid] = nameOfSesion;
+                            chrome.storage.local.set({ "sessionNamePairs" : currentSession });
+                        } else {
+                            chrome.storage.local.set({ "sessionNamePairs" : {[uuid] : nameOfSesion} });
+                        }
+                        setTimeout(function () {
+                            saveIcon[0].setAttribute('src', 'img/save.png')
+                        }, 800);
+                        
+                    })
+                });
             }
-        } catch (err) {
-            throw new Error(err);
-        } finally {
-            var arrayToObject = Object.assign({}, setObj);
-            chrome.storage.local.set(arrayToObject, function (e) {
-                setTimeout(function () {
-                    let element = document.getElementById(windowId).getElementsByClassName('savelocally');
-                    element[0].setAttribute('src', 'img/save.png')
-                }, 1000);
-            });
-        }
-
-    })
+        })
+    }
 }
 // remove element from the array
 function remove(array, element) {
@@ -44,24 +59,28 @@ function guid() {
 function generateSavedListWindow(allKeys) {
     let savedList = document.getElementById('cbListSaved');
     savedList.style.display = '';
-    if (allKeys.length > 1) {
+    if (allKeys.length > 2) {
         // empty DOM (this is equal to innerHTML = '', however, faster)
         while (savedList.firstChild) savedList.removeChild(savedList.firstChild);
         allKeys.map(function (key) {
-            if (key !== 'darkModeIs') {
+            if (key !== 'darkModeIs' && key !== 'sessionNamePairs') {
                 chrome.storage.local.get(key, function (tabsObj) {
 
                     let color = getRandomColor();
                     let listId = "list_" + key;
 
-                    let trashLocally = document.createElement('div');
+                    let sessionHeaderDiv = document.createElement('div');
+                    let actionSetDiv = document.createElement('div');
+                    let sessionNameDiv = document.createElement('div');
+
                     let trashLocallyImg = document.createElement('img');
+                    let sessionName = document.createElement('label');
                     let selectAll = document.createElement('img');
                     trashLocallyImg.setAttribute('src', "img/trash.png");
                     trashLocallyImg.style.width = "16px";
                     trashLocallyImg.style.height = "16px";
                     trashLocallyImg.className = "trashlocally";
-                    trashLocallyImg.title = "Remove from Bookmarks"
+                    trashLocallyImg.title = "Remove from the session"
 
                     selectAll.setAttribute('src', "img/select.png");
                     selectAll.style.width = "16px";
@@ -71,13 +90,11 @@ function generateSavedListWindow(allKeys) {
                     selectAll.style.marginBottom = "-1px";
                     selectAll.style.marginRight = "0.3em";
                     selectAll.addEventListener('click', function (e) {
-
                         let savedListDOM = e.target.parentNode.parentNode.lastChild;
                         let lp = savedListDOM.childNodes;
                         for (var i = 0; i < lp.length; i++) {
                             lp[i].firstChild.click();
                         }
-
                     });
                     trashLocallyImg.addEventListener('click', function (e) {
                         var lists = getSelectedTabs();
@@ -85,27 +102,33 @@ function generateSavedListWindow(allKeys) {
                             // some tabs selected so remove these ones 
                             var windowId = e.target.parentElement.parentElement.id;
                             removeSelectedTabLocally(lists[1], windowId);
-                            //   lists[1].forEach(function(tabId){
-                            //       removeSelectedTabLocally(tabId, windowId);
-                            //   })
                         } else {
                             var result = confirm("This will remove entire window, proceed?");
                             if (result) {
-                                removeWindow(e.target.parentElement.parentElement.id);
+                                removeWindow(e.target.parentElement.parentElement.parentElement.id);
                             }
                         }
 
+                    });
+                    chrome.storage.local.get(["sessionNamePairs"], function(sessions){
+                        sessionName.innerText = sessions.sessionNamePairs[key];
                     });
                     let list = document.createElement("div");
                     list.setAttribute('id', listId);
                     list.classList.add("listMain")
                     list.id = key;
-                    trashLocally.style.backgroundColor = "white";
-                    trashLocally.style.position = "relative";
-                    trashLocally.style.textAlign = "right";
-                    trashLocally.appendChild(selectAll);
-                    trashLocally.appendChild(trashLocallyImg);
-                    list.appendChild(trashLocally);
+                    sessionHeaderDiv.style.backgroundColor = "white";
+                    sessionHeaderDiv.classList.add('session-header')
+                    sessionHeaderDiv.setAttribute('style','display: grid; grid-template-columns: 2fr 2fr;')
+                    actionSetDiv.style.textAlign = 'right';
+                    sessionNameDiv.style.marginLeft = '0.4em';
+
+                    actionSetDiv.appendChild(selectAll);
+                    actionSetDiv.appendChild(trashLocallyImg);
+                    sessionNameDiv.appendChild(sessionName);
+                    sessionHeaderDiv.appendChild(sessionNameDiv);
+                    sessionHeaderDiv.appendChild(actionSetDiv);
+                    list.appendChild(sessionHeaderDiv);
                     cbListSaved.appendChild(list);
 
                     let ul = document.createElement("ul");
@@ -196,6 +219,7 @@ function removeTabLocally(event) {
     windowDOM.lastChild.removeChild(tabDOM);
 }
 
+// remove selected tabs from Session page
 function removeSelectedTabLocally(listOfTabIds, windowId) {
     var saveObj = {};
     chrome.storage.local.get(windowId, function (resultObj) {
@@ -217,16 +241,13 @@ function removeSelectedTabLocally(listOfTabIds, windowId) {
             }
         })
     });
-    // console.log('saveObj', saveObj)
     chrome.storage.local.remove(windowId, function(){
-        chrome.storage.local.set(saveObj,function(e){
-            console.log("saved obj", saveObj)
-        });
+        chrome.storage.local.set(saveObj);
     });
     
 }
 
-// remove locally saved urls
+// remove a session
 function removeWindow(key) {
     chrome.storage.local.remove(key, function () {
         $("#" + key).remove();

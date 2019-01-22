@@ -1,4 +1,4 @@
-"use strict"
+'use strict';
 chrome.runtime.setUninstallURL("https://goo.gl/forms/u4OmQXmfeDz4Urjt2");
 document.addEventListener('DOMContentLoaded', () => {
   var btSplitUp = document.querySelector(".splitUpBt");
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
       saveLocallyImg.style.width = "16px";
       saveLocallyImg.style.height = "16px";
       saveLocallyImg.className = "savelocally";
-      saveLocally.title = "Save to Bookmarks";
+      saveLocally.title = "Save to Sessions";
       closeWindow.setAttribute('src', "img/trash.png");
       closeWindow.style.width = "16px";
       closeWindow.style.height = "16px";
@@ -127,8 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $(".savelocally").off().on('click', function (e) {
           const selectedWindow = e.target.parentElement.parentElement;
           const windowId = selectedWindow.id;
-          saveUrlsLocally(selectedWindow, windowId);
-          document.getElementById(windowId).getElementsByClassName('savelocally')[0].setAttribute('src', 'img/loading.gif');
+          saveUrlsLocally(windowId);
         });
         $(".closeWindow").off().on('click', function (e) {
           var selectedTabs = getSelectedTabs();
