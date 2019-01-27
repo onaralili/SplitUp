@@ -227,7 +227,6 @@ function BindListenersToElements() {
 
   audio.map(function (audioEl) {
     audioEl.addEventListener('click', function (e) {
-      console.log('audio',e)
       muteTab(e.target.parentNode.lastChild.id);
     });
   })

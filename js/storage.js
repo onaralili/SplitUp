@@ -215,6 +215,8 @@ function generateSavedListWindow(allKeys) {
                 } 
             })
 
+        } else {
+            savedList.innerHTML = Sanitizer.escapeHTML`<center><p style="background-color:#e74132; color:white; font-wieght:600;">such a lonely session page, save some tabs</p></center>`;
         }
     } catch (error) {
         throw new Error(error);
