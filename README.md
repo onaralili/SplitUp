@@ -4,7 +4,12 @@
 <p align="center" >
     SplitUp! - Tab Manager
 <p>
+  
+![](https://img.shields.io/chrome-web-store/users/bhoodecbejheonelhikcfahgpgahffmf.svg?label=chrome%20users&style=popout)
+![](https://img.shields.io/amo/users/splitup-tab-manager.svg?label=firefox%20users&style=popout)
 
+
+  
 SplitUp is a tab manager for Chrome & Firefox, it comes with bunch of features:  
 ✅ Save sessions \
 ✅ Split tabs into a new window \
