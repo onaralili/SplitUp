@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
       closeWindow.className = "closeWindow";
       closeWindow.style.marginBottom = "0";
       closeWindow.style.marginRight = "0.3em";
-      closeWindow.title = "Close Window";
+      closeWindow.title = "Close the window or selected tabs";
       windowsList.push(listId);
 
       let list = document.createElement("div");
