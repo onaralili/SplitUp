@@ -4,8 +4,13 @@
 <p align="center" >
     SplitUp! - Tab Manager
 <p>
+  
+![](https://img.shields.io/chrome-web-store/users/bhoodecbejheonelhikcfahgpgahffmf.svg?label=chrome%20users&style=popout)
+![](https://img.shields.io/amo/users/splitup-tab-manager.svg?label=firefox%20users&style=popout)
 
-SplitUp is tab manager for Chrome & Firefox, it comes with bunch of features:  
+
+  
+SplitUp is a tab manager for Chrome & Firefox, it comes with bunch of features:  
 ✅ Save sessions \
 ✅ Split tabs into a new window \
 ✅ Dark mode \
@@ -20,6 +25,7 @@ SplitUp is tab manager for Chrome & Firefox, it comes with bunch of features:
 <a href="https://chrome.google.com/webstore/detail/splitup/bhoodecbejheonelhikcfahgpgahffmf"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_128x128.png" width="48" /></a>
 <a href="https://addons.mozilla.org/en-US/firefox/addon/splitup-tab-manager/"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_128x128.png" width="48" /></a>
 <a href="https://chrome.google.com/webstore/detail/splitup/bhoodecbejheonelhikcfahgpgahffmf"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/brave/brave_128x128.png" width="48" /></a>
+<a href="https://chrome.google.com/webstore/detail/splitup/bhoodecbejheonelhikcfahgpgahffmf"><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/vivaldi/vivaldi_128x128.png" width="48" /></a>
 
 ### Contribution
 [Start a new issue](https://github.com/onaralili/SplitUp/issues/new)
