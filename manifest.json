@@ -3,7 +3,7 @@
   
     "name": "SplitUp! - Tab manager",
     "description": "Have FUN organizing & saving your tabs & windows with the ultimate Tab Manager.",
-    "version": "1.5.3",
+    "version": "1.5.4",
     "short_name" : "SplitUp!",
   
     "browser_action": {

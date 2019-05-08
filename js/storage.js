@@ -1,6 +1,7 @@
 'use strict';
 function saveUrlsLocally(windowId) {
-    var nameOfSesion = prompt("Please name your session", "My session");
+    var nameOfSesion = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+    // prompt("Please name your session", "My session");
     if (nameOfSesion !== null) {
         let saveIcon = document.getElementById(windowId).getElementsByClassName('savelocally');
         saveIcon[0].setAttribute('src', 'img/loading.gif');
