@@ -186,7 +186,7 @@ function generateSavedListWindow(allKeys) {
                                     icon.setAttribute("class", "urlIcon")
                                     urlText.setAttribute("class", "saveditem");
                                     urlText.textContent = tab.title.substring(0, 33);
-                                    urlText.title = tab.title;
+                                    urlText.title = tab.url;
                                     urlText.addEventListener('click', function (e) {
                                         openNewTab(e.target.previousSibling.previousSibling.value);
                                     });
