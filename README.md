@@ -32,7 +32,7 @@ SplitUp is a tab manager for Chrome & Firefox, it comes with bunch of features:
 
 [Leave a review on the web store](https://chrome.google.com/webstore/detail/splitup-tab-manager/bhoodecbejheonelhikcfahgpgahffmf)
 
-<a href="https://www.paypal.me/oalili/5"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"/></a>
+<a href="https://www.paypal.me/onarli/5"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"/></a>
 
 ### Screenshots
 <p align="center">
