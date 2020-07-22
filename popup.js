@@ -1,6 +1,13 @@
 'use strict';
 chrome.runtime.setUninstallURL("https://goo.gl/forms/u4OmQXmfeDz4Urjt2");
 document.addEventListener('DOMContentLoaded', () => {
+
+  var btInfo = document.getElementById("btinfo");
+  btInfo.addEventListener("click", () => {
+
+  });
+
+
   var btSplitUp = document.querySelector(".splitUpBt");
   var windowsList = [];
   btSplitUp.addEventListener('click', () => {
@@ -19,18 +26,25 @@ document.addEventListener('DOMContentLoaded', () => {
   })
   chrome.windows.getAll({ populate: true }, function (windows) {
     var cbList = document.getElementById("cbList");
-
+    let count = 0;
     windows.forEach(function (window) {
+      count++;
       let color = getRandomColor();
       let listId = "list_" + window.id;
       let saveLocally = document.createElement('div');
+      let buttonCollapse = document.createElement('button');
       let saveLocallyImg = document.createElement('img');
       let closeWindow = document.createElement('img');
+
+      buttonCollapse.className = "collapsible";
+      buttonCollapse.innerText = "Window " + count;
+
       saveLocallyImg.setAttribute('src', "img/save.png");
       saveLocallyImg.style.width = "16px";
       saveLocallyImg.style.height = "16px";
       saveLocallyImg.className = "savelocally";
-      saveLocally.title = "Save to Sessions";
+      saveLocallyImg.title = "Save to Sessions";
+
       closeWindow.setAttribute('src', "img/trash.png");
       closeWindow.style.width = "16px";
       closeWindow.style.height = "16px";
@@ -49,11 +63,20 @@ document.addEventListener('DOMContentLoaded', () => {
       saveLocally.style.textAlign = "right";
       saveLocally.appendChild(closeWindow);
       saveLocally.appendChild(saveLocallyImg);
+      saveLocally.appendChild(buttonCollapse);
       list.appendChild(saveLocally);
       cbList.appendChild(list);
 
       let ul = document.createElement("ul");
       ul.setAttribute('id', "list");
+      ul.classList.add('collapsibleContent');
+      // check if the window is current then collapse the list
+      chrome.windows.getCurrent(function (currentWindow) {
+        if (currentWindow.id == window.id) {
+          ul.style.display = "block";
+          buttonCollapse.style.fontWeight = "bold";
+        }
+      });
       list.setAttribute('style', 'border-left: 8px solid ' + color + '!important;')
       list.appendChild(ul);
 
@@ -106,14 +129,14 @@ document.addEventListener('DOMContentLoaded', () => {
         li.appendChild(urlText);
         li.appendChild(close);
         ul.appendChild(li);
-      
+
 
         var cols = document.querySelectorAll('#list .listItem');
         [].forEach.call(cols, addDnDHandlers);
         var searchInput = document.getElementsByClassName('search')[0];
-        searchInput.addEventListener('keyup',function () {
-            search();
-          });
+        searchInput.addEventListener('keyup', function () {
+          search();
+        });
         searchInput.focus();
         // check if dark mode is on
         chrome.storage.local.get(['darkModeIs'], function (result) {
@@ -145,8 +168,28 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       });
-        // binds listeners to the elements
-        BindListenersToElements();
+
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+
+      for (i = 0; i < coll.length; i++) {
+        $(coll[i]).unbind('click').click(function () {
+          this.classList.toggle("active");
+          var content = this.parentElement.nextElementSibling;
+
+          if (content.style.display === "block") {
+            content.style.display = "none";
+            console.log("should be hidden: ", content.style.display)
+          } else {
+            content.style.display = "block";
+            console.log("should be block: ", content.style.display)
+
+          }
+        });
+      }
+
+      // binds listeners to the elements
+      BindListenersToElements();
     });
   });
 });
