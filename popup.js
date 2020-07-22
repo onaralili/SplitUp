@@ -1,5 +1,4 @@
 'use strict';
-chrome.runtime.setUninstallURL("https://goo.gl/forms/u4OmQXmfeDz4Urjt2");
 document.addEventListener('DOMContentLoaded', () => {
 
   var btInfo = document.getElementById("btinfo");
