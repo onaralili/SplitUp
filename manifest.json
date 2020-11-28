@@ -21,5 +21,9 @@
       "tabs",
       "storage"
     ],
-    "commands": {}
+    "commands": {
+      "split-up": {
+        "description": "Split to separate window!"
+      }
+    }
   }

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   var btSplitUp = document.querySelector(".splitUpBt");
   var windowsList = [];
-  btSplitUp.addEventListener('click', () => {
+  const splitUp = () => {
     var lists = getSelectedTabs();
     //creates a window
     if (lists[0] !== null) {
@@ -22,7 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let index = 0; index < lists[1].length; index++) {
       closeTab(lists[1][index])
     }
-  })
+  };
+  btSplitUp.addEventListener('click', splitUp);
+  chrome.commands.onCommand.addListener(command => {
+    if (command === 'split-up') splitUp();
+  });
   chrome.windows.getAll({ populate: true }, function (windows) {
     var cbList = document.getElementById("cbList");
     let count = 0;
