@@ -20,5 +20,10 @@
     "permissions": [
       "tabs",
       "storage"
-    ]
+    ],
+    "commands": {
+      "split-up": {
+        "description": "Split to separate window!"
+      }
+    }
   }
