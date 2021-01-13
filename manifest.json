@@ -22,6 +22,9 @@
       "storage"
     ],
     "commands": {
+      "_execute_browser_action": {
+        "description": "Activate extension"
+      },
       "split-up": {
         "description": "Split to separate window!"
       }
