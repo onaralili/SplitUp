@@ -57,8 +57,9 @@ function search() {
       a = li[i].getElementsByTagName("span")[0];
       if (a.title.toUpperCase().indexOf(filter) > -1) 
       {
-          hideDiv=false;
+        hideDiv=false;
         li[i].style.display = "";
+        addSelectTabListener(li[i]);
       } 
       else 
       {
@@ -207,6 +208,12 @@ function separateExtFn() {
   });
 }
 
+function addSelectTabListener(el) {
+  el.addEventListener('click', function (e) {
+    selectTab(e.target.nextSibling.id);
+  });
+}
+
 function BindListenersToElements() {
   let closes = Array.from(document.getElementsByClassName('cclose'));
   let urlTexts = Array.from(document.getElementsByClassName('item'))
@@ -220,9 +227,7 @@ function BindListenersToElements() {
   })
 
   urlTexts.map(function (urlText) {
-    urlText.addEventListener('click', function (e) {
-      selectTab(e.target.nextSibling.id);
-    });
+    addSelectTabListener(urlText);
   })
 
   audio.map(function (audioEl) {
