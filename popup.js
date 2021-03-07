@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let buttonCollapse = document.createElement('button');
       let saveLocallyImg = document.createElement('img');
       let closeWindow = document.createElement('img');
+      let selectAll = document.createElement('img');
 
       buttonCollapse.className = "collapsible";
       buttonCollapse.innerText = "Window " + count;
@@ -53,8 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
       closeWindow.style.height = "16px";
       closeWindow.className = "closeWindow";
       closeWindow.style.marginBottom = "0";
-      closeWindow.style.marginRight = "0.3em";
+      closeWindow.style.marginRight = "0.8em";
       closeWindow.title = "Close the window or selected tabs";
+
+      selectAll.setAttribute('src', "img/checkbox_outline.png");
+      selectAll.style.width = "20px";
+      selectAll.style.height = "20px";
+      selectAll.className = "selectAll";
+      selectAll.style.marginBottom = "-2px";
+      selectAll.style.marginRight = "0.3em";
+      selectAll.title = "Select all tabs in this window";
       windowsList.push(listId);
 
       let list = document.createElement("div");
@@ -66,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
       saveLocally.style.textAlign = "right";
       saveLocally.appendChild(closeWindow);
       saveLocally.appendChild(saveLocallyImg);
+      saveLocally.appendChild(selectAll);
       saveLocally.appendChild(buttonCollapse);
       list.appendChild(saveLocally);
       cbList.appendChild(list);
@@ -169,6 +179,18 @@ document.addEventListener('DOMContentLoaded', () => {
               document.getElementById(windowId).remove();
             }
           }
+        });
+        $(".selectAll").off().on('click', function (e) {
+            let checkboxImg = 'img/checkbox.png';
+            if (e.target.getAttribute('src') === 'img/checkbox.png') {
+              checkboxImg = 'img/checkbox_outline.png';
+            }
+            e.target.setAttribute('src', checkboxImg);
+            let savedListDOM = e.target.parentNode.parentNode.lastChild;
+            let lp = savedListDOM.childNodes;
+            for (var i = 0; i < lp.length; i++) {
+                lp[i].firstChild.click();
+            }
         });
       });
 
