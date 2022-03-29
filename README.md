@@ -32,7 +32,7 @@ SplitUp is a tab manager for Chrome & Firefox, it comes with bunch of features:
 
 [Leave a review on the web store](https://chrome.google.com/webstore/detail/splitup-tab-manager/bhoodecbejheonelhikcfahgpgahffmf)
 
-<a href="https://www.buymeacoffee.com/onar"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=onar&button_colour=FF5F5F&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00"></a>
+<a href="https://www.buymeacoffee.com/onar"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=onar&button_colour=FF5F5F&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
 
 ### Screenshots
 <p align="center">
